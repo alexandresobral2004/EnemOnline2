@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../TemplateQuestao.xhtml">
+
+            <ui:define name="content">
+
+
+                <h:form id="exibe">
+                  
+
+                        
+                        <p:panelGrid columns="3" style="a" >
+
+                            <f:facet name="header">
+                                Escolha a Disciplina e clique em iniciar
+                            </f:facet>
+                            <h:outputText value="Especifique a Disciplina.:"/>
+                            <p:selectOneMenu value="#{exibeQuestaoFaces.selectedQuestao.disciplina}" converter="DisciplinaConverter" >
+                                <f:selectItems value="#{disciplinaFaces.findAllDisciplinas()}" var="dis" itemLabel="#{dis.nome}" itemValue="#{var}"/>                 
+
+                            </p:selectOneMenu>
+
+                        </p:panelGrid>
+                        
+                       
+                        <br/>
+                        <center>
+                            <p:commandButton action="#{exibeQuestaoFaces.carregaQuestao()}"  value="Iniciar" update="exibe:texto,exibe:itens"  ajax="false" >
+                                <p:ajax  update="itens" listener="#{exibeQuestaoFaces.mostraQuestao()}" />
+                            </p:commandButton> 
+                        </center>
+                    
+                    <br/>
+                   
+
+
+                    <p:panel id="basic" header="Questões preparatórias para o ENEM" footer="CED - CENTRO DE EDUCAÇÃO A DISTÂNCIA DO CEARÁ" style="margin-bottom:20px">
+
+
+                        <h:outputText value="#{exibeQuestaoFaces.selectedQuestao.texto}" id="texto"  class="textoQuestao" /><br/><br/>
+
+
+                        <p:panelGrid columns="3" id="itens"  rendered="#{exibeQuestaoFaces.mostraquestao}" class="ui-widget-content2" >
+                            <h:outputText value="#{exibeQuestaoFaces.selectItem_a.item}"/>
+                            <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_a.itemMarcado}" id="a" >
+                                <p:ajax update="exibe:itens" listener="#{exibeQuestaoFaces.selectOneitem_a()}" />
+                            </p:selectBooleanCheckbox>
+                            <h:outputText value="#{exibeQuestaoFaces.selectItem_a.textoitemQuestao}" />
+
+
+                            <h:outputText value="#{exibeQuestaoFaces.selectItem_b.item}"/>
+                            <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_b.itemMarcado}" id="b" >
+                                <p:ajax update="exibe:itens" listener="#{exibeQuestaoFaces.selectOneitem_b()}" />
+                            </p:selectBooleanCheckbox>
+                            <h:outputText value="#{exibeQuestaoFaces.selectItem_b.textoitemQuestao}" />
+
+                            <h:outputText value="#{exibeQuestaoFaces.selectItem_c.item}"/>
+                            <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_c.itemMarcado}" id="c" >
+                                <p:ajax update="exibe:itens" listener="#{exibeQuestaoFaces.selectOneitem_c()}" />
+                            </p:selectBooleanCheckbox>
+                            <h:outputText value="#{exibeQuestaoFaces.selectItem_c.textoitemQuestao}" />
+
+                            <h:outputText value="#{exibeQuestaoFaces.selectItem_d.item}"/>
+                            <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_d.itemMarcado}" id="d" >
+                                <p:ajax update="exibe:itens" listener="#{exibeQuestaoFaces.selectOneitem_d()}" />
+                            </p:selectBooleanCheckbox>
+                            <h:outputText value="#{exibeQuestaoFaces.selectItem_d.textoitemQuestao}" />
+
+                            <h:outputText value="#{exibeQuestaoFaces.selectItem_e.item}"/>
+                            <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_e.itemMarcado}" id="e" >
+                                <p:ajax update="exibe:itens" listener="#{exibeQuestaoFaces.selectOneitem_e()}" />
+                            </p:selectBooleanCheckbox>
+                            <h:outputText value="#{exibeQuestaoFaces.selectItem_e.textoitemQuestao}" />   
+
+                        </p:panelGrid>
+                        <p:messages id="mensQuestao"/>
+                    </p:panel>
+
+                    <br/>
+                    <p:panel id="botoes" class="pnlBotoes">
+                        <center>
+                            <p:commandButton action="#{exibeQuestaoFaces.validaItemQuestao}" value="Responder" update="exibe:mensQuestao,exibe:acertoserros"/>
+                               
+                            
+                            
+                            <p:commandButton action="#{exibeQuestaoFaces.carregaNovaQuestao()}" value="Próxima" update="exibe:texto,exibe:itens,exibe:mensQuestao" />
+                        </center>
+                    </p:panel>
+                    <br/>
+                    <p:panelGrid columns="2" id="acertoserros" >
+                            <h:outputText value="Acertos.:"/>
+                            <h:outputText value="#{exibeQuestaoFaces.acertos}"/>
+                            <h:outputText value="Erros.:"/>
+                            <h:outputText value="#{exibeQuestaoFaces.erros}"/>
+                            <h:outputText value="Total Questões Respondidas.:"/>
+                            <h:outputText value="#{exibeQuestaoFaces.totalQuestoes}"/>
+                        </p:panelGrid>
+
+
+
+
+
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

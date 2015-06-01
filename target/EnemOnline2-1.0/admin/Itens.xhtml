@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../Template.xhtml">
+
+            <ui:define name="content" >
+                <h:form id="item" enctype="multipart/form-data" >
+                    <p:messages id="message"/>
+                    <p:panelGrid columns="2">
+                         <h:outputText value="Número da questão.:"/>
+                         <p:selectOneMenu value="#{itemFaces.selectQuestao}"  converter="QuestaoConverter">
+                            
+                             <f:selectItems var="q" value="#{itemFaces.questoes}" itemLabel="#{q.id}" itemValue="#{q}"/>
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                   <br/>
+                    <p:fieldset legend="Item a">
+                        
+
+                        
+                        <h:panelGrid columns="2" cellpadding="5">
+
+                            <h:outputText value="Item da Questão.:" />
+                            <p:inputText value="#{itemFaces.selectItem_a.item}"  size="1" maxlength="1" disabled="true"/>
+                            <h:outputText value="Item Correto?"/>
+                            <p:selectBooleanCheckbox value="#{itemFaces.selectItem_a.resposta}" />
+                            <h:outputText value="Descrição do ítem.:"/>
+                            <p:inputTextarea value="#{itemFaces.selectItem_a.textoitemQuestao}"  cols="50" id="input"/>
+
+
+                        </h:panelGrid> 
+                        <p:fileUpload
+                            mode="advanced"
+                            fileUploadListener="#{itemFaces.handleFileUpload_A}"
+                            allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                            auto="true"/>
+                    </p:fieldset>
+                   <br/>
+                   <p:fieldset legend="Item b" >
+                        
+
+                        
+                        <h:panelGrid columns="2" cellpadding="5">
+
+                            <h:outputText value="Item da Questão.:" />
+                            <p:inputText value="#{itemFaces.selectItem_b.item}"  size="1" maxlength="1" disabled="true"/>
+                            <h:outputText value="Item Correto?"/>
+                            <p:selectBooleanCheckbox value="#{itemFaces.selectItem_b.resposta}" />
+                            <h:outputText value="Descrição do ítem.:"/>
+                            <p:inputTextarea value="#{itemFaces.selectItem_b.textoitemQuestao}"  cols="50" id="inputb"/>
+
+
+                        </h:panelGrid> 
+                        <p:fileUpload
+                            mode="advanced"
+                            fileUploadListener="#{itemFaces.handleFileUpload_B}"
+                            allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                            auto="true"/>
+                    </p:fieldset>
+                   <p:fieldset legend="Item c" >
+                        
+
+                        
+                        <h:panelGrid columns="2" cellpadding="5">
+
+                            <h:outputText value="Item da Questão.:" />
+                            <p:inputText value="#{itemFaces.selectItem_c.item}"  size="1" maxlength="1" disabled="true"/>
+                            <h:outputText value="Item Correto?"/> 
+                            <p:selectBooleanCheckbox value="#{itemFaces.selectItem_c.resposta}" />
+                            <h:outputText value="Descrição do ítem.:"/>
+                            <p:inputTextarea value="#{itemFaces.selectItem_c.textoitemQuestao}"  cols="50" id="inputc"/>
+
+
+                        </h:panelGrid> 
+                        <p:fileUpload
+                            mode="advanced"
+                            fileUploadListener="#{itemFaces.handleFileUpload_C}"
+                            allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                            auto="true"/>
+                    </p:fieldset>
+                   
+                   <p:fieldset legend="Item d" >
+                        
+
+                        
+                        <h:panelGrid columns="2" cellpadding="5">
+
+                            <h:outputText value="Item da Questão.:" />
+                            <p:inputText value="#{itemFaces.selectItem_d.item}"  size="1" maxlength="1" disabled="true"/>
+                            <h:outputText value="Item Correto?"/>
+                            <p:selectBooleanCheckbox value="#{itemFaces.selectItem_d.resposta}" />
+                            <h:outputText value="Descrição do ítem.:"/>
+                            <p:inputTextarea value="#{itemFaces.selectItem_d.textoitemQuestao}"  cols="50" id="inputd"/>
+
+
+                        </h:panelGrid> 
+                        <p:fileUpload
+                            mode="advanced"
+                            fileUploadListener="#{itemFaces.handleFileUpload_D}"
+                            allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                            auto="true"/>
+                    </p:fieldset>
+                   
+                   <p:fieldset legend="Item e" >
+                        
+
+                        
+                        <h:panelGrid columns="2" cellpadding="5">
+
+                            <h:outputText value="Item da Questão.:" />
+                            <p:inputText value="#{itemFaces.selectItem_e.item}"  size="1" maxlength="1" disabled="true"/>
+                            <h:outputText value="Item Correto?"/>
+                            <p:selectBooleanCheckbox value="#{itemFaces.selectItem_e.resposta}" />
+                            <h:outputText value="Descrição do ítem.:"/>
+                            <p:inputTextarea value="#{itemFaces.selectItem_e.textoitemQuestao}"  cols="50" id="inpute"/>
+
+
+                        </h:panelGrid> 
+                        <p:fileUpload
+                            mode="advanced"
+                            fileUploadListener="#{itemFaces.handleFileUpload_E}"
+                            allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                            auto="true"/>
+                    </p:fieldset>
+                   <br/>
+                   <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
+                       <p:commandButton action="#{itemFaces.newItem()}" value="Novo" ajax="false"/>
+                       <p:commandButton action="#{itemFaces.addItem()}" value="Gravar" ajax="false" update="item:message" />
+                   </p:panel>
+                      
+
+                  
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+      
+    </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:component>
+
+        <h:form>
+            <p:growl id="messages"/>
+
+            <p:menubar autoDisplay="false">
+              
+                <p:submenu label="Cadastros">
+                    <p:submenu label="Questão">
+                            <p:menuitem value="Nova Questão"   action="#{questaoFaces.startQuestao()}" ajax="false" />
+                            <p:menuitem value="Adicionar Itens"   action="#{itemFaces.startItem()}" ajax="false" />
+                    </p:submenu>
+                    <p:submenu label="Disciplina">
+                         <p:menuitem value="Disciplina"   action="#{disciplinaFaces.startDisciplina()}" ajax="false" />         
+                    </p:submenu>
+                   
+                </p:submenu>
+                <p:submenu label="Questão">
+                    <p:menuitem value="ExibeQuestão"   action="#{exibeQuestaoFaces.startQuestao()}" ajax="false" />
+                           
+                </p:submenu>
+
+
+                <p:menuitem value="Sair"   url="/j_spring_security_logout" action="http://187.76.147.150:8081/nrcomonline/" ajax="false" />
+            </p:menubar>
+
+
+        </h:form>
+    </ui:component>
+</html>
