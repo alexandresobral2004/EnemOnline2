@@ -38,7 +38,7 @@ public class ItemDAO extends DAO<Item, Long> implements Serializable{
     }
 
     public Item getItemByID(int id) {
-        Item item  = getItemByID(id);
+        Item item  = getEntity(Item.class, id);
         return item ;
     }
 
