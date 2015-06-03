@@ -16,7 +16,6 @@
       <property name="hibernate.connection.datasource" value="jdbc/enem"/>
       <property name="hibernate.transaction.factory_class" value="org.hibernate.transaction.JTATransactionFactory"/>
       <property name="hibernate.connection.autocommit" value="false"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>
