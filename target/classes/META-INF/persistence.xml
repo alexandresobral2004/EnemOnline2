@@ -11,6 +11,7 @@
     <class>model.Escola</class>
     <class>model.Aluno</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
     <properties>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
       <property name="hibernate.connection.datasource" value="jdbc/enem"/>

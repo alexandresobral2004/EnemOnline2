@@ -21,17 +21,19 @@ import javax.persistence.Table;
  * @author cedsobral
  */
 @Entity
-@Table()
+@Table(name = "escola")
 public class Escola implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(length = 200)
+    @Column(length = 150)
     private String nome;
-    @Column(length = 100)
-    private String cidade;
     @Column(length = 50)
+    private String cidade;
+    @Column(length = 16)
     private String fone;
+    @Column(length = 60)
+    private String email;
    
 
     public Integer getId() {
@@ -64,6 +66,14 @@ public class Escola implements Serializable{
 
     public void setFone(String fone) {
         this.fone = fone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     

@@ -1,5 +1,6 @@
 managedBean/QuestaoFaces.class
 model/Prova_.class
+managedBean/AlunoFaces.class
 dao/ItemDAO.class
 managedBean/disciplinaFaces.class
 Converter/QuestaoConverter.class
@@ -10,6 +11,7 @@ model/Aluno.class
 Util/DatabaseUtil.class
 managedBean/ExibeQuestaoFaces.class
 model/Escola_.class
+managedBean/InterfacePadrao.class
 model/Escola.class
 model/prova_questao_.class
 Converter/DisciplinaConverter.class
@@ -17,6 +19,7 @@ Converter/TextoConverter.class
 dao/EscolaDAO.class
 dao/QuestaoDAO.class
 Util/JPAFilter.class
+managedBean/EscolaFaces.class
 model/Prova.class
 dao/disciplinaDAO.class
 model/Disciplina.class

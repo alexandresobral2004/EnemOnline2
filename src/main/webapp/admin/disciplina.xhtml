@@ -13,7 +13,7 @@
             <ui:define name="content">
                 <h:form id="disci">
                     <center>
-                        <br/><br/><br/>
+                        <br/>
                        <p:panelGrid columns="2" id="pnlDisci">
                         <f:facet name="header">
                             Cadastro de Disciplinas
@@ -23,8 +23,8 @@
                     </p:panelGrid>
                     <br/>
                     <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
-                        <p:commandButton action="#" value="Novo" ajax="false"/>
-                    <p:commandButton value="Gravar" action="#{disciplinaFaces.addDisciplina()}" ajax="false" update="disci:message"/>
+                        <p:commandButton action="#{disciplinaFaces.newObject()}" value="Novo" />
+                    <p:commandButton value="Gravar" action="#{disciplinaFaces.addDisciplina()}"  update="disci:message"/>
                     </p:panel>
                     </center>
                 </h:form>

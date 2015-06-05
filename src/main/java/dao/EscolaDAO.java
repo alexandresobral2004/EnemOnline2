@@ -7,12 +7,14 @@ package dao;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.ejb.Stateless;
 import model.Escola;
 
 /**
  *
  * @author cedsobral
  */
+@Stateless
 public class EscolaDAO extends DAO<Escola, Long> implements Serializable{
 
     public EscolaDAO() {
@@ -37,7 +39,7 @@ public class EscolaDAO extends DAO<Escola, Long> implements Serializable{
     }
 
     public List<Escola> getAllEscolas() {
-       List<Escola> itens = getListaAll(Escola.class, "SELECT i From Escola i");
+       List<Escola> itens = getListaAll(Escola.class, "SELECT esc From Escola esc");
        return itens;
     }
     //"SELECT i FROM Escola i where i.questao_id='"+id+"' ",id

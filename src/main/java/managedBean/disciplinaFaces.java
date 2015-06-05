@@ -16,6 +16,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import model.Disciplina;
+import model.Escola;
 
 /**
  *
@@ -61,6 +62,10 @@ public class disciplinaFaces implements Serializable{
     
     public disciplinaFaces() {
        this.selectedDisci = new Disciplina();
+    }
+    
+    public void newObject(){
+        this.selectedDisci = new Disciplina();
     }
     
     
