@@ -36,9 +36,11 @@
 
                         </p:panel>
                         <br/><br/>
-                        <p:dataTable id="dtEscola" var="esc" value="#{escolaFaces.escolas}" editable="true" style="margin-bottom:20px">
+
+
+                        <p:dataTable id="dtEscola" var="esc" value="#{escolaFaces.escolas}" editable="true" style="margin-bottom:20px;text-align: center; ">
                             <f:facet name="header">
-                               Lista de Escolas Cadastradas
+                                Lista de Escolas Cadastradas
                             </f:facet>
 
                             <p:ajax event="rowEdit" listener="#{escolaFaces.editEscola}" update=":formEscola:message" />
@@ -56,28 +58,28 @@
                                     <f:facet name="input"><p:inputText  value="#{esc.nome}" style="width:100%"/></f:facet>
                                 </p:cellEditor>
                             </p:column>
-                             <p:column headerText="E-mail">
+                            <p:column headerText="E-mail">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{esc.email}" /></f:facet>
                                     <f:facet name="input"><p:inputText id="modelInput" value="#{esc.email}" style="width:100%"/></f:facet>
                                 </p:cellEditor>
                             </p:column>
-                             <p:column headerText="Fone">
+                            <p:column headerText="Fone">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{esc.fone}" /></f:facet>
                                     <f:facet name="input"><p:inputText  value="#{esc.fone}" style="width:100%"/></f:facet>
                                 </p:cellEditor>
                             </p:column>
-                            
-                            
-                             <p:column headerText="Município">
+
+
+                            <p:column headerText="Município">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{esc.cidade}" /></f:facet>
                                     <f:facet name="input"><p:inputText value="#{esc.cidade}" style="width:100%"/></f:facet>
                                 </p:cellEditor>
                             </p:column>
 
-                           
+
 
                             <p:column style="width:32px" headerText="Editar">
                                 <p:rowEditor />

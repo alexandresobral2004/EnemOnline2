@@ -33,6 +33,7 @@ public abstract class DAO<T, PK extends Serializable> implements Serializable {
 
     public void salvar(T t) throws Exception {
         em.persist(t);
+        
     }
 
     public void excluir(T t) throws Exception {
@@ -43,6 +44,9 @@ public abstract class DAO<T, PK extends Serializable> implements Serializable {
     public void atualizar(T t) throws Exception {
         em.merge(t);
         em.clear();
+        
+    
+       
     }
 
    

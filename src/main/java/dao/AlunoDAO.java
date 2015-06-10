@@ -7,12 +7,14 @@ package dao;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.ejb.Stateless;
 import model.Aluno;
 
 /**
  *
  * @author cedsobral
  */
+@Stateless
 public class AlunoDAO extends DAO<Aluno, Long> implements Serializable{
 
     public AlunoDAO() {
@@ -38,8 +40,8 @@ public class AlunoDAO extends DAO<Aluno, Long> implements Serializable{
     }
 
     public List<Aluno> getAllAlunos() {
-       List<Aluno> itens = getListaAll(Aluno.class, "SELECT i From Aluno i");
-       return itens;
+       List<Aluno> alunos = getListaAll(Aluno.class, "SELECT a from Aluno a");
+       return alunos;
     }
     //"SELECT i FROM Aluno i where i.questao_id='"+id+"' ",id
      

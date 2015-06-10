@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,8 +32,12 @@ public class Questao implements Serializable{
     private Integer id;
     @Column(length = 2000,nullable = false)
     private String texto;
+    @Column(length = 50)
+    private String tema;
     private int numQuestao;
-    @ManyToOne()
+     @Column()
+    private String imagem;
+    @ManyToOne(fetch = FetchType.EAGER)
     private Disciplina disciplina;
     @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "questao_id")
@@ -82,6 +87,23 @@ public class Questao implements Serializable{
 
     public void setNumQuestao(int numQuestao) {
         this.numQuestao = numQuestao;
+    }
+
+    public String getTema() {
+        return tema;
+    }
+
+    public void setTema(String tema) {
+        this.tema = tema;
+    }
+
+    public String getImagem() {
+       
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     

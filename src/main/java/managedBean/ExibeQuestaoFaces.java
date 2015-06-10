@@ -49,12 +49,14 @@ public class ExibeQuestaoFaces implements Serializable {
     private int acertos;
     private int erros;
     private int totalQuestoes;
+    private Boolean imagemQuestao;
 
     public Questao getSelectedQuestao() {
         return selectedQuestao;
     }
 
     public Item getSelectItem() {
+        
         return selectItem;
     }
 
@@ -156,6 +158,14 @@ public class ExibeQuestaoFaces implements Serializable {
         this.totalQuestoes = totalQuestoes;
     }
 
+    public Boolean getImagemQuestao() {
+        return imagemQuestao;
+    }
+
+    public void setImagemQuestao(Boolean imagemQuestao) {
+        this.imagemQuestao = imagemQuestao;
+    }
+
     
 
     
@@ -175,6 +185,7 @@ public class ExibeQuestaoFaces implements Serializable {
         this.acertos = 0;
         this.erros = 0;
         this.totalQuestoes = 0;
+        this.imagemQuestao = false;
        
         
         
@@ -195,6 +206,9 @@ public class ExibeQuestaoFaces implements Serializable {
    
 
     public void preencheItens(Questao q) {
+       try{
+           
+       
         this.itens = new ArrayList<>();
 
         this.itens = itemDAO.getItemsQuestao(q.getId());
@@ -203,6 +217,11 @@ public class ExibeQuestaoFaces implements Serializable {
         this.selectItem_c = this.itens.get(2);
         this.selectItem_d = this.itens.get(3);
         this.selectItem_e = this.itens.get(4);
+        }
+       catch(ArrayIndexOutOfBoundsException e){
+           FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Itens não cadastrados", null);
+            FacesContext.getCurrentInstance().addMessage("message", message);
+       }
 
     }
 
@@ -318,14 +337,22 @@ public class ExibeQuestaoFaces implements Serializable {
      private List<Questao> lista  = null;
      
     public void carregaQuestao() {
+        try{
+            
+        
         this.var = 0;
        this.lista = null;
         this.lista = pegaQuestaoBanco();
         this.selectedQuestao = this.lista.get(0);
         System.out.println(String.valueOf(this.lista.size()));
-
+        caminhoImagem(this.selectedQuestao);
         preencheItens(selectedQuestao);
         this.mostraquestao = true;
+        this.imagemQuestao = true;
+        }
+        catch(StringIndexOutOfBoundsException e){
+           
+        }
 
     }
 
@@ -340,6 +367,7 @@ public class ExibeQuestaoFaces implements Serializable {
                 this.selectedQuestao = this.lista.get(this.var);
                 preencheItens(this.selectedQuestao);
                 this.mostraquestao = true;
+                caminhoImagem(this.selectedQuestao);
                 
             }
             else{
@@ -348,18 +376,30 @@ public class ExibeQuestaoFaces implements Serializable {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Questões Encerradas", null);
                 FacesContext.getCurrentInstance().addMessage("message", message);      
             }
-        } 
-        catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             this.lista = null;
-            
+
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Questões Encerradas", null);
-            FacesContext.getCurrentInstance().addMessage("message", message);          
+            FacesContext.getCurrentInstance().addMessage("message", message);
+
+        } catch (StringIndexOutOfBoundsException f) {
 
         }
+
    
         
         
         
+    }
+    
+    public void caminhoImagem(Questao q){
+        int x = q.getImagem().length();
+        String imagem = q.getImagem();
+        System.out.println("Número de Bytes: "+String.valueOf(x));
+        String caminho = imagem.substring(86,x);
+        
+        q.setImagem(caminho);
+        System.out.println("Caminho modificado: "+caminho);
     }
     
     

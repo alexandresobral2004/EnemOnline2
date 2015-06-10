@@ -12,6 +12,7 @@
 
             <ui:define name="content">
                 <h:form id="disci">
+                    <p:growl id="message"/>
                     <center>
                         <br/>
                        <p:panelGrid columns="2" id="pnlDisci">
@@ -23,7 +24,7 @@
                     </p:panelGrid>
                     <br/>
                     <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
-                        <p:commandButton action="#{disciplinaFaces.newObject()}" value="Novo" />
+                        <p:commandButton action="#{disciplinaFaces.newObject()}" value="Novo" ajax="false" />
                     <p:commandButton value="Gravar" action="#{disciplinaFaces.addDisciplina()}"  update="disci:message"/>
                     </p:panel>
                     </center>

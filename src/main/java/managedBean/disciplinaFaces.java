@@ -84,4 +84,10 @@ public class disciplinaFaces implements Serializable{
 
     }
     
+    public void getAllDisciplinas(){
+        this.disciplinas = null;
+        this.disciplinas = disciDAO.findAllDisciplinas();
+    }
+   
+    
 }

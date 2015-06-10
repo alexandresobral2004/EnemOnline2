@@ -121,6 +121,9 @@
 .ui-widget-header {
    background:  #adb136 !important;  
 }
-#tabelaQuestoes{
-    
+.acerto{
+    color: blue;
+}
+.erros{
+    color: #D20005;
 }

@@ -8,9 +8,11 @@ package managedBean;
 import dao.ItemDAO;
 import dao.QuestaoDAO;
 import dao.disciplinaDAO;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.Disciplina;
@@ -28,6 +31,7 @@ import model.Prova;
 import model.Questao;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -45,6 +49,8 @@ public class QuestaoFaces implements Serializable{
     private Item selectedItem;
     //Lista de disciplinas
     private List<Disciplina> disciplinas;
+    private String newFileName_A;
+
     
    
     
@@ -138,6 +144,7 @@ public class QuestaoFaces implements Serializable{
         this.selectedQuestao = new Questao();
        //Instancia itens das questoes
         this.selectedItem = new Item();
+         carregaDisciplinas();
         //incrementaNumQuestao();
          findAllQuestaoes();//Carrega a lista de questões cadastradas
          carregaDisciplinas();//carrega a lista de disciplinas
@@ -156,15 +163,17 @@ public class QuestaoFaces implements Serializable{
       
          FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Questão Gravada com Sucesso", "Dados Gravados Com Sucesso!!");
          FacesContext.getCurrentInstance().addMessage("message", message);
+          this.selectedQuestao.setImagem(this.newFileName_A);
         questaoDAO.addquestao(selectedQuestao);
         findAllQuestaoes();
+         
         selectedQuestao = new Questao();
        // incrementaNumQuestao();
         System.out.println("Questão Inserida");
     }
     
     public void newQuestao(){
-       
+     
       this.selectedQuestao = new Questao();
       //incrementaNumQuestao();
       
@@ -172,12 +181,15 @@ public class QuestaoFaces implements Serializable{
     
   
     
+    public String startEditQuestao(){
+        return "/admin/editQuestao.jsf";
+    }
     
-    
-    public void editQuestao(RowEditEvent event) throws Exception {
+    public String editQuestao() throws Exception {
         questaoDAO.editQuestao(selectedQuestao);
         FacesMessage msg = new FacesMessage("Questão Editada",null);
         FacesContext.getCurrentInstance().addMessage(null, msg);
+        return "/admin/questao.jsf";
     }
      
     public void onCancel(RowEditEvent event) {
@@ -221,6 +233,38 @@ public class QuestaoFaces implements Serializable{
     }
            
 
+    UploadedFile file;
+    
+
+        public void uploadImagem(FileUploadEvent event) {
+            file = event.getFile();
+            ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+            this.newFileName_A = servletContext.getRealPath("") + File.separator + "resources" + File.separator + "imagem"+ File.separator +file.getFileName();
+                
+            System.out.println("Caminho"+ newFileName_A);
+     
+             
+            FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            try {
+                FileOutputStream fos = new FileOutputStream(new File(newFileName_A));
+                InputStream is = file.getInputstream();
+                int BUFFER_SIZE = 8192;
+                byte[] buffer = new byte[BUFFER_SIZE];
+                int a;
+                while (true) {
+                    a = is.read(buffer);
+                    if (a < 0) {
+                        break;
+                    }
+                    fos.write(buffer, 0, a);
+                    fos.flush();
+                }
+                fos.close();
+                is.close();
+            } catch (IOException e) {
+            }
+        }
 
 
     

@@ -30,7 +30,14 @@
                                 <f:selectItems value="#{questaoFaces.disciplinas}" var="dis" itemValue="#{dis}" itemLabel="#{dis.nome}"/>
 
                             </p:selectOneMenu>
-
+                            <h:outputText value="Tema.:"/>
+                            <p:inputText value="#{questaoFaces.selectedQuestao.tema}" />
+                            <h:outputText value="Upload de Imagem"/>
+                            <p:fileUpload
+                            mode="advanced"
+                            fileUploadListener="#{questaoFaces.uploadImagem}"
+                            allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                            auto="true" update=":form:msgs" />
                             <h:outputText value="Descrição da Questão.:" />
                             <h:inputTextarea value="#{questaoFaces.selectedQuestao.texto}" rows="4" cols="50" id="txtQuestao" />
 
@@ -66,7 +73,7 @@
                                     <f:facet name="input"><p:inputText id="modelInput" value="#{q.id}" style="width:100%" disabled="true"/></f:facet>
                                 </p:cellEditor>
                             </p:column>
-                            <p:column headerText="Disciplina" style="width: 60px">
+                            <p:column headerText="Disciplina" style="width: 100px">
                                 <p:cellEditor>
                                     <f:facet name="output">
                                         <h:outputText value="#{q.disciplina.nome}" />
@@ -74,8 +81,8 @@
                                     </f:facet>
 
                                     <f:facet name="input">
-                                        <h:selectOneMenu value="#{q.disciplina}" converter="DisciplinaConverter">
-                                            <f:selectItems value="#{disciplinaFaces.findAllDisciplinas()}"  var="d" itemLabel="#{d.nome}" itemValue="#{d}"/>
+                                        <h:selectOneMenu value="#{q.disciplina}" converter="DisciplinaConverter"  >
+                                            <f:selectItems value="#{questaoFaces.disciplinas}"  var="d" itemLabel="#{d.nome}" itemValue="#{d}"/>
                                         </h:selectOneMenu>
                                     </f:facet>
                                 </p:cellEditor>
@@ -95,12 +102,16 @@
                                    
                                 </p:cellEditor>
                             </p:column>
-                            <p:column style="width:40px" headerText="Editar">
+                            <p:column style="width:60px" headerText="Editar">
+                                <p:commandButton icon="ui-icon-pencil" action="#{questaoFaces.startEditQuestao()}"  >
+                                    <f:setPropertyActionListener value="#{q}" target="#{questaoFaces.selectedQuestao}"  />
+                                   
 
-                                <p:rowEditor /> 
+                                </p:commandButton>     
+                                
                             </p:column>
-                                 <p:column style="width:80px" headerText="Apagar">
-                                <p:commandButton value="Apagar"  update=":form:msgs,:form:questoes " action="#{questaoFaces.delQuestao()}" >
+                                 <p:column style="width:60px" headerText="Apagar">
+                                <p:commandButton icon="ui-icon-trash"  update=":form:msgs,:form:questoes " action="#{questaoFaces.delQuestao()}" >
                                     <f:setPropertyActionListener value="#{q}" target="#{questaoFaces.selectedQuestao}"  />
                                     <p:confirm header="Confirmation" message="Apagar Questão?" icon="ui-icon-alert"  />
 
@@ -119,8 +130,8 @@
                             </p:column>
                             
                             
-                            <p:column style="width:80px" headerText="Ítens">
-                                <p:commandButton action="#{itemFaces.startItem()}" value="Add Ítem">
+                            <p:column style="width:60px" headerText="Add ítens">
+                                <p:commandButton action="#{itemFaces.startItem()}" icon="ui-icon-plusthick">
                                  <f:setPropertyActionListener value="#{q}" target="#{questaoFaces.selectedQuestao}"  />
                                 </p:commandButton>
                             </p:column>

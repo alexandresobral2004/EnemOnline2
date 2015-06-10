@@ -6,6 +6,7 @@
 package managedBean;
 
 import dao.AlunoDAO;
+import dao.EscolaDAO;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
@@ -16,6 +17,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import model.Aluno;
+import model.Escola;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -29,14 +31,19 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
     //Objetos usados nas páginas XHTML
     private Aluno selectedAluno;
     private List<Aluno> alunos;
+    private List<Escola> escolas;
     
     //Chamada dos DAO's
     @Inject
     private AlunoDAO alunoDAO;
+    @Inject
+    private EscolaDAO escDAO;
 
     @Override
     public String startFaces() {
        this.selectedAluno = new Aluno();
+       this.alunos = alunoDAO.getAllAlunos();
+       this.escolas = escDAO.getAllEscolas();
        return "/aluno/cad_aluno.jsf";
        
     }
@@ -57,6 +64,18 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
         this.alunos = alunos;
     }
     
+    public String startEditAluno(){
+        return "/aluno/editAluno.jsf";
+    }
+
+    public List<Escola> getEscolas() {
+        return escolas;
+    }
+
+    public void setEscolas(List<Escola> escolas) {
+        this.escolas = escolas;
+    }
+    
     
 
     @Override
@@ -64,6 +83,7 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
         try {
             alunoDAO.addAluno(selectedAluno);
             selectedAluno = new Aluno();
+            this.alunos = alunoDAO.getAllAlunos();
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado Realizado com Sucesso", null);
             FacesContext.getCurrentInstance().addMessage("message", message);
         } catch (Exception ex) {
@@ -85,12 +105,14 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
             Logger.getLogger(AlunoFaces.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        
     }
 
     @Override
     public void del() {
         try {
             alunoDAO.delAluno(selectedAluno);
+            this.alunos = alunoDAO.getAllAlunos();
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastro Apagado com Sucesso", null);
          FacesContext.getCurrentInstance().addMessage("message", message);
         } catch (Exception ex) {
@@ -103,7 +125,7 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
 
    
     @Override
-    public void getAllObjetosByID() {
+    public void getAllObjetos() {
         this.alunos = null;
         this.alunos = alunoDAO.getAllAlunos();
         
@@ -114,6 +136,10 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
     public Aluno getObjetoByID(int id) {
        this.selectedAluno = alunoDAO.getAlunoByID(id);
        return selectedAluno;
+    }
+    
+    public void newAluno(){
+        selectedAluno = new Aluno();
     }
     
     /* public void editQuestao(RowEditEvent event) throws Exception {
@@ -128,7 +154,17 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
     }*/
     
     
-    
+    public String editAluno() throws Exception {
+        alunoDAO.editAluno(selectedAluno);
+        FacesMessage msg = new FacesMessage("Aluno Editado",null);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        return "/aluno/cad_aluno.jsf";
+    }
+     
+    public void onCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Aluno não Editado", null);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
     
     
     

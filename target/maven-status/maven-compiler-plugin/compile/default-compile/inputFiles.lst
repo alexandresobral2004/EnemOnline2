@@ -1,4 +1,5 @@
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/Converter/QuestaoConverter.java
+/Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/Converter/EscolaConverter.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/managedBean/EscolaFaces.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/managedBean/itemFaces.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/model/Prova.java
@@ -11,7 +12,6 @@
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/dao/QuestaoDAO.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/dao/AlunoDAO.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/Converter/DisciplinaConverter.java
-/Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/Converter/TextoConverter.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/model/Questao.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/Util/JPAUtil.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/managedBean/AlunoFaces.java

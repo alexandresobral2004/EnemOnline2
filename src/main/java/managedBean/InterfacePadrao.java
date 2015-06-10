@@ -21,6 +21,6 @@ public interface InterfacePadrao {
     public void edit();
     public void del();
     public <T> T getObjetoByID(int id);
-    public void getAllObjetosByID();
+    public void getAllObjetos();
     
 }

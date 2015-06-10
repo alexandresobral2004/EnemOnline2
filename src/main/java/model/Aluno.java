@@ -32,11 +32,13 @@ public class Aluno implements Serializable {
     @Column(length = 200, nullable = false)
     private String nome;
     @Temporal(TemporalType.DATE)
-    @Column()
+    @Column
     private Date dtNasc;
     @Column(length = 14)
     private String cpf;
-    private String rg;
+    
+    @Column()
+    private String email;
     @ManyToOne()
     private Escola escola;
 
@@ -72,13 +74,6 @@ public class Aluno implements Serializable {
         this.cpf = cpf;
     }
 
-    public String getRg() {
-        return rg;
-    }
-
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
 
     public Escola getEscola() {
         return escola;
@@ -87,6 +82,15 @@ public class Aluno implements Serializable {
     public void setEscola(Escola escola) {
         this.escola = escola;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
 
     
 

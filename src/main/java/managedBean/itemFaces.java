@@ -276,6 +276,7 @@ public class itemFaces implements Serializable {
             ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
             this.newFileName_A = servletContext.getRealPath("") + File.separator + "uploaded" + File.separator + file.getFileName();
             System.out.println("Caminho"+ newFileName_A);
+           
             FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             try {

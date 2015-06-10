@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../Template.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form" enctype="multipart/form-data">
+                    <center>
+                        <br/>
+                        <p:growl id="msgs"/>
+                        <p:panelGrid columns="2" id="pnlQuestao">
+                            <f:facet name="header">
+                                Edição de Questões
+                            </f:facet>
+
+                            <h:outputText value="Disciplina.:"/>
+                            <p:selectOneMenu value="#{questaoFaces.selectedQuestao.disciplina}" converter="DisciplinaConverter" >
+
+                                <f:selectItems value="#{questaoFaces.disciplinas}" var="dis" itemValue="#{dis}" itemLabel="#{dis.nome}"/>
+
+                            </p:selectOneMenu>
+                            <h:outputText value="Tema.:"/>
+                            <p:inputText value="#{questaoFaces.selectedQuestao.tema}" />
+                            <h:outputText value="Upload de Imagem"/>
+                            <p:fileUpload
+                                mode="advanced"
+                                fileUploadListener="#{questaoFaces.uploadImagem}"
+                                allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                                auto="true" update=":form:msgs" />
+                            <h:outputText value="Descrição da Questão.:" />
+                            <h:inputTextarea value="#{questaoFaces.selectedQuestao.texto}" rows="4" cols="50" id="txtQuestao" />
+
+
+                        </p:panelGrid>
+                    </center>
+                    <br/>
+
+
+                    <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
+                       
+                        <p:commandButton value="Atualizar" action="#{questaoFaces.editQuestao()}" ajax="false" />
+
+
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

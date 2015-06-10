@@ -15,7 +15,6 @@ managedBean/InterfacePadrao.class
 model/Escola.class
 model/prova_questao_.class
 Converter/DisciplinaConverter.class
-Converter/TextoConverter.class
 dao/EscolaDAO.class
 dao/QuestaoDAO.class
 Util/JPAFilter.class

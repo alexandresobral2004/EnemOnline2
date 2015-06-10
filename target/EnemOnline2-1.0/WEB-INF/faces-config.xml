@@ -15,4 +15,8 @@
         <converter-id>QuestaoConverter</converter-id>
         <converter-class>Converter.QuestaoConverter</converter-class>
     </converter>
+    <converter>
+        <converter-id>EscolaConverter</converter-id>
+        <converter-class>Converter.EscolaConverter</converter-class>
+    </converter>
 </faces-config>

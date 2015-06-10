@@ -107,7 +107,7 @@ public class EscolaFaces implements Serializable, InterfacePadrao {
     }
 
     @Override
-     public void getAllObjetosByID() {
+     public void getAllObjetos() {
         this.escolas=null;
         this.escolas = escDAO.getAllEscolas();
         
