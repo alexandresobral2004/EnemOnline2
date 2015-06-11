@@ -19,7 +19,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
@@ -144,7 +146,7 @@ public class QuestaoFaces implements Serializable{
         this.selectedQuestao = new Questao();
        //Instancia itens das questoes
         this.selectedItem = new Item();
-         carregaDisciplinas();
+        
         //incrementaNumQuestao();
          findAllQuestaoes();//Carrega a lista de questões cadastradas
          carregaDisciplinas();//carrega a lista de disciplinas
@@ -163,18 +165,30 @@ public class QuestaoFaces implements Serializable{
       
          FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Questão Gravada com Sucesso", "Dados Gravados Com Sucesso!!");
          FacesContext.getCurrentInstance().addMessage("message", message);
-          this.selectedQuestao.setImagem(this.newFileName_A);
+          verificaImagem();
         questaoDAO.addquestao(selectedQuestao);
         findAllQuestaoes();
          
         selectedQuestao = new Questao();
+        this.newFileName_A = null;
        // incrementaNumQuestao();
         System.out.println("Questão Inserida");
+    }
+    
+    public void verificaImagem(){
+      
+        if(this.newFileName_A==null){
+            this.selectedQuestao.setImagem(".");
+        }
+        else{
+            this.selectedQuestao.setImagem(this.newFileName_A);
+        }
     }
     
     public void newQuestao(){
      
       this.selectedQuestao = new Questao();
+       this.selectedQuestao.setImagem("sem imagem");
       //incrementaNumQuestao();
       
     }
@@ -186,7 +200,10 @@ public class QuestaoFaces implements Serializable{
     }
     
     public String editQuestao() throws Exception {
-        questaoDAO.editQuestao(selectedQuestao);
+        
+       
+        questaoDAO.editQuestao(this.selectedQuestao);
+          
         FacesMessage msg = new FacesMessage("Questão Editada",null);
         FacesContext.getCurrentInstance().addMessage(null, msg);
         return "/admin/questao.jsf";

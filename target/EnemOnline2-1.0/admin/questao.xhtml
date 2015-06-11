@@ -38,6 +38,8 @@
                             fileUploadListener="#{questaoFaces.uploadImagem}"
                             allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
                             auto="true" update=":form:msgs" />
+                            <h:outputText value="Caminho da Imagem.:" />
+                              <h:inputText value="#{questaoFaces.selectedQuestao.imagem}"  id="txtimagem"  size="120"/>
                             <h:outputText value="Descrição da Questão.:" />
                             <h:inputTextarea value="#{questaoFaces.selectedQuestao.texto}" rows="4" cols="50" id="txtQuestao" />
 
@@ -46,9 +48,9 @@
                          </center>
                         <br/>
 
-
+          
                         <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
-                            <p:commandButton value="Novo" action="#{questaoFaces.newQuestao()}" ajax="false"/>
+                            <p:commandButton value="Novo" action="#{questaoFaces.newQuestao()}" ajax="false" type="reset"/>
                             <p:commandButton value="Gravar" action="#{questaoFaces.addQuestao()}" ajax="false" />
 
 
@@ -103,7 +105,7 @@
                                 </p:cellEditor>
                             </p:column>
                             <p:column style="width:60px" headerText="Editar">
-                                <p:commandButton icon="ui-icon-pencil" action="#{questaoFaces.startEditQuestao()}"  >
+                                <p:commandButton icon="ui-icon-pencil" action="#{questaoFaces.startEditQuestao()}"  ajax="false" >
                                     <f:setPropertyActionListener value="#{q}" target="#{questaoFaces.selectedQuestao}"  />
                                    
 
@@ -134,6 +136,13 @@
                                 <p:commandButton action="#{itemFaces.startItem()}" icon="ui-icon-plusthick">
                                  <f:setPropertyActionListener value="#{q}" target="#{questaoFaces.selectedQuestao}"  />
                                 </p:commandButton>
+                                
+                            </p:column>
+                             <p:column style="width:60px" headerText="Edit ítens">
+                                 <p:commandButton action="#{itemFaces.startEditItens()}" icon="ui-icon-plusthick">
+                                  <f:setPropertyActionListener value="#{q}" target="#{questaoFaces.selectedQuestao}"  />
+                                </p:commandButton>
+                                
                             </p:column>
 
 

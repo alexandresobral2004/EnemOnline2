@@ -43,7 +43,8 @@ public abstract class DAO<T, PK extends Serializable> implements Serializable {
 
     public void atualizar(T t) throws Exception {
         em.merge(t);
-        em.clear();
+        em.flush();
+       
         
     
        

@@ -351,7 +351,14 @@ public class ExibeQuestaoFaces implements Serializable {
         this.imagemQuestao = true;
         }
         catch(StringIndexOutOfBoundsException e){
+             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao Carregar Ítens", null);
+             FacesContext.getCurrentInstance().addMessage("message", message);      
+            
            
+        }
+        catch(ArrayIndexOutOfBoundsException f){
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Desculpe, esta disciplina não tem Questões cadastradas", null);
+             FacesContext.getCurrentInstance().addMessage("message", message);  
         }
 
     }
@@ -377,14 +384,18 @@ public class ExibeQuestaoFaces implements Serializable {
                 FacesContext.getCurrentInstance().addMessage("message", message);      
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            this.lista = null;
+           
 
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Questões Encerradas", null);
             FacesContext.getCurrentInstance().addMessage("message", message);
 
-        } catch (StringIndexOutOfBoundsException f) {
+        } catch (StringIndexOutOfBoundsException e) {
 
         }
+          catch(NullPointerException e){
+              
+          }
+             
 
    
         

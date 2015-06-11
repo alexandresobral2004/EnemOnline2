@@ -16,6 +16,8 @@ import java.io.InputStream;
 import java.io.Serializable;
 import static java.util.Collections.list;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -49,19 +51,7 @@ public class itemFaces implements Serializable {
     @Inject
     QuestaoDAO questaoDAO;
 
-    public String startItem() {
-        selectItem_a = new Item();
-        selectItem_b = new Item();
-        selectItem_c = new Item();
-        selectItem_d = new Item();
-        selectItem_e = new Item();
-        selectQuestao = new Questao();
-        preencheItemQuestao();
-        carregaQuestoes();
-
-        System.out.println("Cadastro de Itens iniciado");
-        return "/admin/Itens.jsf";
-    }
+    
 
     public Questao getSelectQuestao() {
         return selectQuestao;
@@ -157,6 +147,76 @@ public class itemFaces implements Serializable {
 
     public void setQuestoes(List<Questao> questoes) {
         this.questoes = questoes;
+    }
+
+    public List<Item> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
+    }
+    
+    
+    
+    public String startItem() {
+        selectItem_a = new Item();
+        selectItem_b = new Item();
+        selectItem_c = new Item();
+        selectItem_d = new Item();
+        selectItem_e = new Item();
+        selectQuestao = new Questao();
+        preencheItemQuestao();
+        carregaQuestoes();
+
+        System.out.println("Cadastro de Itens iniciado");
+        return "/admin/Itens.jsf";
+    }
+    
+    public void findItensEdicao() {
+        this.itens = itemDAO.getItemsQuestao(this.selectQuestao.getId());
+        this.selectItem_a = itens.get(0);
+        this.selectItem_b = itens.get(1);
+        this.selectItem_c = itens.get(2);
+        this.selectItem_d = itens.get(3);
+        this.selectItem_e = itens.get(4);
+       
+    }
+
+    public String startEditItens(){
+        selectItem_a = new Item();
+        selectItem_b = new Item();
+        selectItem_c = new Item();
+        selectItem_d = new Item();
+        selectItem_e = new Item();
+        selectQuestao = new Questao();
+        preencheItemQuestao();
+        carregaQuestoes();
+      
+         System.out.println("Cadastro de Itens iniciado");
+        return "/admin/edit_Itens.jsf";
+    }
+    
+    public void editItens(){
+        try
+        {
+            
+            this.itemDAO.editItem(this.selectItem_a);
+            this.itemDAO.editItem(this.selectItem_b);
+            this.itemDAO.editItem(this.selectItem_c);
+            this.itemDAO.editItem(this.selectItem_d);
+            this.itemDAO.editItem(this.selectItem_e);
+            selectQuestao = new Questao();
+        } catch (Exception ex) {
+            Logger.getLogger(itemFaces.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+   
+    
+    public void carregaItens(){
+        this.itens = null;
+        this.itens = itemDAO.getItemsQuestao(this.selectQuestao.getId());
     }
     
     

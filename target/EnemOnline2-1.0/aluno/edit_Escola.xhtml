@@ -14,11 +14,10 @@
                 <h:form id="formEscola">
                     <p:growl id="message"/>
                     <center>
-
                         <br/><br/>
                         <p:panelGrid columns="2">
                             <f:facet name="header">
-                                Cadastro de Escolas
+                               Edição de Escola
                             </f:facet>
                             <h:outputText value="Nome.:"/>
                             <p:inputText value="#{escolaFaces.selectedEscola.nome}" maxlength="150" size="100"/>
@@ -32,7 +31,7 @@
                         <br/><br/>
                         <p:panel>
                            
-                            <p:commandButton action="#{escolaFaces.add()}" value="Gravar" update=":formEscola:message,:formEscola:dtEscola" />
+                            <p:commandButton action="#{escolaFaces.editEscola()}" value="Gravar" update=":formEscola:message" />
 
                         </p:panel>
                         <br/><br/>

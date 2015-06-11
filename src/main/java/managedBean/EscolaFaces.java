@@ -15,7 +15,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.persistence.PersistenceException;
+import javax.persistence.RollbackException;
 import model.Escola;
+import org.eclipse.persistence.exceptions.DatabaseException;
+import org.postgresql.util.PSQLException;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -95,9 +99,20 @@ public class EscolaFaces implements Serializable, InterfacePadrao {
               getAllEscolas();
                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Escola Apagada!", null);
             FacesContext.getCurrentInstance().addMessage("message", message);
+        } catch (DatabaseException ex) {
+             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Escola não pode ser apagada, está vinculada a alunos!", null);
+            FacesContext.getCurrentInstance().addMessage("message", message);
+           
         } catch (Exception ex) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Escola não pode ser apagada, está vinculada a alunos!", null);
+            FacesContext.getCurrentInstance().addMessage("message", message);
             Logger.getLogger(EscolaFaces.class.getName()).log(Level.SEVERE, null, ex);
         }
+          
+      
+    
+        
+        
     }
 
     @Override
@@ -122,12 +137,15 @@ public class EscolaFaces implements Serializable, InterfacePadrao {
     
     
     
+    public String startEditEscola(){
+        return "/aluno/edit_escola.jsf";
+    }
     
-    
-     public void editEscola(RowEditEvent event) throws Exception {
+     public String  editEscola() throws Exception {
         escDAO.editEscola(selectedEscola);
         FacesMessage msg = new FacesMessage("Escola Editada",null);
         FacesContext.getCurrentInstance().addMessage(null, msg);
+        return "/aluno/cad_escola.jsf";
     }
      
     public void onCancel(RowEditEvent event) {

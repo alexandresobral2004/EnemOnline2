@@ -8,7 +8,11 @@ package dao;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.PersistenceException;
+import javax.persistence.RollbackException;
 import model.Escola;
+import org.eclipse.persistence.exceptions.DatabaseException;
+import org.postgresql.util.PSQLException;
 
 /**
  *
@@ -29,8 +33,12 @@ public class EscolaDAO extends DAO<Escola, Long> implements Serializable{
         atualizar(escola);
     }
 
-    public void delEscola(Escola escola) throws Exception {
-        excluir(escola);
+    public void delEscola(Escola escola) throws Exception   {
+      
+           excluir(escola);
+      
+       
+        
     }
 
     public Escola getEscolaByID(int id) {
