@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./TemplateEntrada.xhtml">
+
+            <ui:define name="content">
+               <p:dialog header="ENEM-ONLINE" visible="true" closable="false" draggable="false" resizable="false" width="420" modal="true">
+
+            <form action="j_spring_security_check" method="post">
+
+
+                <fieldset>
+                    <legend>Login do Usuário</legend>
+                    <h:outputLabel for="j_username" value="Login .: " />
+                    <h:inputText id="j_username" required="true"/><br/><br/>
+                    <h:outputLabel for="j_password" value="Senha.: " />
+                    <h:inputSecret id="j_password" required="true"/>
+
+                    <br/><br/>
+                    <h:commandButton value="login"/>  
+                </fieldset>      
+                <center>
+                    <h:outputText value="Usuário ou senha incorretos!" rendered="#{param.erro}" style="color: #D20005"/>
+                </center>
+
+            </form>
+        </p:dialog>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -36,11 +36,17 @@ public class Aluno implements Serializable {
     private Date dtNasc;
     @Column(length = 14)
     private String cpf;
-    
+    @Column( nullable = false)
+    private String login;
+    @Column( nullable = false)
+    private String senha;
+    @Column( nullable = false)
+    private String confirmaSenha;
     @Column()
     private String email;
     @ManyToOne()
     private Escola escola;
+    private String authority;
 
     public Long getID() {
         return ID;
@@ -90,8 +96,40 @@ public class Aluno implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getConfirmaSenha() {
+        return confirmaSenha;
+    }
+
+    public void setConfirmaSenha(String confirmaSenha) {
+        this.confirmaSenha = confirmaSenha;
+    }
+
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
+    
+    
     
 
     @Override

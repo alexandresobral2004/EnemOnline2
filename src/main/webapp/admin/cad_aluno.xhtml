@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../Template.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formAluno">
+                    <p:growl id="message"/>
+                    <br/>
+                    <center>
+                        
+                    
+                    <p:panelGrid columns="2">
+                        <f:facet name="header">
+                            Cadastro de Alunos
+                        </f:facet>
+                        <h:outputText value="Nome.:"/>
+                        <p:inputText value="#{alunoFaces.selectedAluno.nome}"  maxlength="150" size="100"/>
+                        <h:outputText value="Login.:"/>
+                        <p:inputText value="#{alunoFaces.selectedAluno.login}"  maxlength="30" size="30"/>
+                        <h:outputText value="Senha.:"/>
+                        <p:password value="#{alunoFaces.selectedAluno.senha}"  maxlength="30" size="30"/>
+                        <h:outputText value="Confirma Senha.:"/>
+                        <p:password value="#{alunoFaces.selectedAluno.confirmaSenha}"  maxlength="30" size="30"/>
+
+                         <h:outputText value="Nível Acesso.:"/>
+                         <p:selectOneMenu value="#{alunoFaces.selectedAluno.authority}"  >
+                             <f:selectItems value="#{alunoFaces.nivelAcessoUsuario}"/>
+                         </p:selectOneMenu>
+                        
+                        <h:outputText value="E-mail.:"/>
+                        <p:inputText value="#{alunoFaces.selectedAluno.email}" maxlength="60" size="60"/>
+                        
+
+                        <h:outputText value="CPF.:"/>
+                        <p:inputMask mask="999.999.999-99" value="#{alunoFaces.selectedAluno.cpf}" size="14"/>
+
+                        <h:outputText value="Data de Nascimento.:"/>
+                        <p:inputMask mask="99/99/9999" value="#{alunoFaces.selectedAluno.dtNasc}" size="10">
+                            <f:convertDateTime parent="dd/MM/yyyy" dateStyle="short"  timeZone="America/Sao_Paulo"/>
+                        </p:inputMask>
+
+                        <h:outputText value="Escola.:"/>
+                        <p:selectOneMenu value="#{alunoFaces.selectedAluno.escola}" converter="EscolaConverter" >
+                            <f:selectItems value="#{alunoFaces.escolas}" var="esc" itemLabel="#{esc.nome}" itemValue="#{esc}"/>
+
+                        </p:selectOneMenu>
+
+
+                    </p:panelGrid>
+                   
+                    <br/><br/>
+                    <p:panel>
+                        <p:commandButton action="#{alunoFaces.newAluno()}" value="Novo"  ajax="false"/>
+                        <p:commandButton action="#{alunoFaces.add()}" value="Gravar" update=":formAluno:message,:formAluno:dtAluno" />
+
+                    </p:panel>
+                     </center>
+                    <br/><br/>
+                    <p:dataTable id="dtAluno" var="alu" value="#{alunoFaces.alunos}" editable="true" style="margin-bottom:20px;text-align: center; ">
+                        <f:facet name="header">
+                            Lista de Alunos Cadastrados
+                        </f:facet>
+
+                        <p:ajax event="rowEdit" listener="#{alunoFaces.edit}" update=":formAluno:message" />
+                        <p:ajax event="rowEditCancel" listener="#{alunoFaces.onCancel}" update=":formAluno:message" />
+
+                        <p:column headerText="Id" style="width: 10px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{alu.ID}" /></f:facet>
+                                <f:facet name="input"><p:inputText  value="#{alu.ID}" disabled="true" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Nome">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{alu.nome}" /></f:facet>
+                                <f:facet name="input"><p:inputText  value="#{alu.nome}" style="width:50%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                         <p:column headerText="Login">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{alu.login}" /></f:facet>
+                                <f:facet name="input"><p:inputText id="login" value="#{alu.login}" style="width:50%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                         <p:column headerText="Senha">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{alu.senha}" /></f:facet>
+                                <f:facet name="input"><p:inputText id="senha" value="#{alu.senha}" style="width:50%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Nível de Acesso">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{alu.authority}" /></f:facet>
+                                <f:facet name="input"><p:inputText id="confirmaSenha" value="#{alu.authority}" style="width:50%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="E-mail">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{alu.email}" /></f:facet>
+                                <f:facet name="input"><p:inputText id="email" value="#{alu.email}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="CPF">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{alu.cpf}" /></f:facet>
+                                <f:facet name="input"><p:inputText  value="#{alu.cpf}" style="width:50%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                        <p:column headerText="Data de Nascimento">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{alu.dtNasc}" >
+                                     <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText></f:facet>
+                                <f:facet name="input"><p:inputText value="#{alu.dtNasc}" style="width:100%">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </p:inputText></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Escola">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{alu.escola.nome}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:selectOneMenu value="#{alunoFaces.selectedAluno.escola}" converter="EscolaConverter" >
+                                        <f:selectItems value="#{escolaFaces.escolas}" var="esc" itemLabel="#{esc.nome}" itemValue="#{esc}"/>
+
+                                    </p:selectOneMenu>
+
+
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                        <p:column style="width:50px" headerText="Editar">
+                            <p:commandButton   icon="ui-icon-pencil" action="#{alunoFaces.startEditAluno()}"   >
+                                <f:setPropertyActionListener value="#{alu}" target="#{alunoFaces.selectedAluno}"  />
+                                  
+                                </p:commandButton>     
+                        </p:column>
+                        <p:column style="width:40px" headerText="Apagar">
+                            <p:commandButton action="#{alunoFaces.del}" icon="ui-icon-trash" ajax="false">
+                                <f:setPropertyActionListener value="#{alu}" target="#{alunoFaces.selectedAluno}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+
+                    
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

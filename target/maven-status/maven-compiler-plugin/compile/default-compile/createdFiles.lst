@@ -26,6 +26,7 @@ model/Item_.class
 model/Disciplina_.class
 model/prova_questao.class
 model/Questao.class
+Converter/EscolaConverter.class
 managedBean/itemFaces.class
 model/Questao_.class
 Util/JPAUtil.class

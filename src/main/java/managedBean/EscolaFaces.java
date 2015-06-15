@@ -58,8 +58,10 @@ public class EscolaFaces implements Serializable, InterfacePadrao {
         this.selectedEscola = new Escola();
         getAllEscolas();
         
-        return "/aluno/cad_escola.jsf";
+        return "/admin/cad_escola.jsf";
     }
+    
+    
     
     public void newObject(){
          this.selectedEscola = new Escola();
@@ -138,7 +140,7 @@ public class EscolaFaces implements Serializable, InterfacePadrao {
     
     
     public String startEditEscola(){
-        return "/aluno/edit_escola.jsf";
+        return "/admin/edit_escola.jsf";
     }
     
      public String  editEscola() throws Exception {

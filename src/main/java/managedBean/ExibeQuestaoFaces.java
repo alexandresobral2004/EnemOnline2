@@ -9,11 +9,8 @@ import dao.ItemDAO;
 import dao.QuestaoDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import static javafx.application.Platform.exit;
-import javafx.scene.control.CheckBox;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -21,8 +18,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import model.Item;
 import model.Questao;
-import org.primefaces.context.PrimeFacesContext;
-import org.primefaces.event.ItemSelectEvent;
 /**
  *
  * @author cedsobral
@@ -191,7 +186,7 @@ public class ExibeQuestaoFaces implements Serializable {
         
        
         System.out.println("Inicia Questao");
-        return "/aluno/questoes.jsf";
+        return "/publico/questoes.jsf";
 
     }
 
@@ -351,6 +346,7 @@ public class ExibeQuestaoFaces implements Serializable {
         this.imagemQuestao = true;
         }
         catch(StringIndexOutOfBoundsException e){
+            e.printStackTrace();
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao Carregar Ítens", null);
              FacesContext.getCurrentInstance().addMessage("message", message);      
             
@@ -405,12 +401,18 @@ public class ExibeQuestaoFaces implements Serializable {
     
     public void caminhoImagem(Questao q){
         int x = q.getImagem().length();
+        if(x > 86){
+            
+       
         String imagem = q.getImagem();
         System.out.println("Número de Bytes: "+String.valueOf(x));
+        
         String caminho = imagem.substring(86,x);
         
         q.setImagem(caminho);
         System.out.println("Caminho modificado: "+caminho);
+         } 
+        
     }
     
     

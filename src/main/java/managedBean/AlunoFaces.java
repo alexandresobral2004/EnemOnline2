@@ -8,6 +8,7 @@ package managedBean;
 import dao.AlunoDAO;
 import dao.EscolaDAO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +33,8 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
     private Aluno selectedAluno;
     private List<Aluno> alunos;
     private List<Escola> escolas;
+    private List nivelAcessoUsuario;
+    private List nivelAcessoAluno;
     
     //Chamada dos DAO's
     @Inject
@@ -39,14 +42,8 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
     @Inject
     private EscolaDAO escDAO;
 
-    @Override
-    public String startFaces() {
-       this.selectedAluno = new Aluno();
-       this.alunos = alunoDAO.getAllAlunos();
-       this.escolas = escDAO.getAllEscolas();
-       return "/aluno/cad_aluno.jsf";
-       
-    }
+   
+   
 
     public Aluno getSelectedAluno() {
         return selectedAluno;
@@ -64,9 +61,7 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
         this.alunos = alunos;
     }
     
-    public String startEditAluno(){
-        return "/aluno/editAluno.jsf";
-    }
+   
 
     public List<Escola> getEscolas() {
         return escolas;
@@ -75,6 +70,63 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
     public void setEscolas(List<Escola> escolas) {
         this.escolas = escolas;
     }
+
+    public List getNivelAcessoUsuario() {
+        return nivelAcessoUsuario;
+    }
+
+    public void setNivelAcessoUsuario(List nivelAcessoUsuario) {
+        this.nivelAcessoUsuario = nivelAcessoUsuario;
+    }
+
+    public List getNivelAcessoAluno() {
+        return nivelAcessoAluno;
+    }
+
+    public void setNivelAcessoAluno(List nivelAcessoAluno) {
+        this.nivelAcessoAluno = nivelAcessoAluno;
+    }
+    
+    public void nivelAcessoUsuario(){
+       
+    }
+    
+    public void permissoes(){
+        this.nivelAcessoUsuario = new ArrayList();
+        this.nivelAcessoUsuario.add("ADMIN");
+        this.nivelAcessoUsuario.add("ESCOLA");
+        this.nivelAcessoUsuario.add("PUBLICO");
+        
+    }
+    
+     public String startEditAluno(){
+        return "/aluno/editAluno.jsf";
+    }
+     
+      @Override
+    public String startFaces() {
+       this.selectedAluno = new Aluno();
+      permissoes();
+       this.alunos = alunoDAO.getAllAlunos();
+       this.escolas = escDAO.getAllEscolas();
+       return "/admin/cad_aluno.jsf";
+       
+    }
+    
+     public String cad_aluno_entrada() {
+       this.selectedAluno = new Aluno();
+       this.selectedAluno.setAuthority("ESCOLA");
+          this.escolas = escDAO.getAllEscolas();
+          
+          System.out.println("Chamada Aluno");
+          return "/cad_aluno.jsf";
+    }
+     
+      public String fazer_login() {
+      
+          return "/login.jsf";
+    }
+  
     
     
 
@@ -141,24 +193,13 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
     public void newAluno(){
         selectedAluno = new Aluno();
     }
-    
-    /* public void editQuestao(RowEditEvent event) throws Exception {
-        questaoDAO.editQuestao(selectedQuestao);
-        FacesMessage msg = new FacesMessage("Questão Editada",null);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-     
-    public void onCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Questao Não Editada", null);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }*/
-    
+   
     
     public String editAluno() throws Exception {
         alunoDAO.editAluno(selectedAluno);
         FacesMessage msg = new FacesMessage("Aluno Editado",null);
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        return "/aluno/cad_aluno.jsf";
+        return "/admin/cad_aluno.jsf";
     }
      
     public void onCancel(RowEditEvent event) {
@@ -166,6 +207,8 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
+    
+   
     
     
     

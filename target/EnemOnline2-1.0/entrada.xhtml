@@ -1,18 +1,32 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
-     
+
         <title>ENEM-ONLINE</title>
     </h:head>
     <h:body class="padrao_entrada" >
         <div id="texto" class="texto_entrada">
             Sistema de Questões ENEM-ONLINE
-            
-            <img src="resources/imagem/enem-logo-6.jpg" class="imagem_enem_entrada"/>
+
+        </div>
+
+        <div class="imagem_enem_entrada">
+            <h:form>
+                
+          
+            <fieldset>
+                <legend>Escolha uma das opções abaixo:</legend>
+                <p:commandButton action="#{alunoFaces.cad_aluno_entrada()}" value="Cadastrar"/>
+                <p:commandButton action="#{alunoFaces.fazer_login()}" value="Login"/>
+            </fieldset>
+
+             </h:form>
         </div>
     </h:body>
 </html>

@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:wsosft="http://www.springframework.org/security/facelets/tags">
+
 
     <ui:component>
 
@@ -10,30 +12,45 @@
             <p:growl id="messages"/>
 
             <p:menubar autoDisplay="false">
-              
-                <p:submenu label="Cadastros">
-                    <p:submenu label="Questão">
+               
+
+                 <wsosft:ifAnyGranted roles="ADMIN">
+                    <p:submenu label="Cadastros">
+                        <p:submenu label="Questão">
                             <p:menuitem value="Nova Questão"   action="#{questaoFaces.startQuestao()}" ajax="false" />
-                            
+
+                        </p:submenu>
+                        <p:submenu label="Disciplina">
+                            <p:menuitem value="Disciplina"   action="#{disciplinaFaces.startDisciplina()}" ajax="false" />         
+                        </p:submenu>
+                        <p:submenu label="Escola">
+                            <p:menuitem value="Nova Escola"   action="#{escolaFaces.startFaces()}" ajax="false" />         
+                        </p:submenu>
+                        <p:submenu label="Aluno">
+                            <p:menuitem value="Novo Aluno"   action="#{alunoFaces.startFaces()}" ajax="false" />         
+                        </p:submenu>
+
                     </p:submenu>
-                    <p:submenu label="Disciplina">
-                         <p:menuitem value="Disciplina"   action="#{disciplinaFaces.startDisciplina()}" ajax="false" />         
-                    </p:submenu>
-                    <p:submenu label="Escola">
-                        <p:menuitem value="Nova Escola"   action="#{escolaFaces.startFaces()}" ajax="false" />         
-                    </p:submenu>
-                    <p:submenu label="Aluno">
-                        <p:menuitem value="Novo Aluno"   action="#{alunoFaces.startFaces()}" ajax="false" />         
-                    </p:submenu>
-                   
-                </p:submenu>
-                <p:submenu label="Questão">
-                    <p:menuitem value="ExibeQuestão"   action="#{exibeQuestaoFaces.startQuestao()}" ajax="false" />
-                           
-                </p:submenu>
+
+                    
+                
+                </wsosft:ifAnyGranted>
+                
+                <wsosft:ifAnyGranted roles="ESCOLA,ADMIN">
 
 
-                <p:menuitem value="Sair"   url="/j_spring_security_logout" action="http://187.76.147.150:8081/nrcomonline/" ajax="false" />
+
+                    <p:submenu label="Questões">
+
+                        <p:menuitem value="Iniciar"   action="#{exibeQuestaoFaces.startQuestao()}" ajax="false" />
+
+                    </p:submenu>
+                </wsosft:ifAnyGranted>
+
+                
+               
+
+                <p:menuitem value="Sair"   url="/j_spring_security_logout" action="logout.jsf"  />
             </p:menubar>
 
 

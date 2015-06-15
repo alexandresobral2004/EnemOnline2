@@ -31,13 +31,14 @@
         <param-value>/WEB-INF/componentes/facelets.taglib.xml</param-value>
     </context-param>
     <welcome-file-list>
-        <welcome-file>index.jsf</welcome-file>
+        <welcome-file>entrada.jsf</welcome-file>
     </welcome-file-list>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    
     <filter>
   <filter-name>PrimeFaces FileUpload Filter</filter-name>
   <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
@@ -47,4 +48,21 @@
   <servlet-name>Faces Servlet</servlet-name>
   <url-pattern>*.jsf</url-pattern>
 </filter-mapping>
+
+
+       
+ <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+  
 </web-app>

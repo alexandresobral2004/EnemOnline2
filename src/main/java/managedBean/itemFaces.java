@@ -207,7 +207,11 @@ public class itemFaces implements Serializable {
             this.itemDAO.editItem(this.selectItem_d);
             this.itemDAO.editItem(this.selectItem_e);
             selectQuestao = new Questao();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "null", "Dados Atualizados com Sucesso!!");
+            FacesContext.getCurrentInstance().addMessage("message", message);
         } catch (Exception ex) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "null", "Erro ao Atualizar Dados!!");
+            FacesContext.getCurrentInstance().addMessage("message", message);
             Logger.getLogger(itemFaces.class.getName()).log(Level.SEVERE, null, ex);
         }
         
