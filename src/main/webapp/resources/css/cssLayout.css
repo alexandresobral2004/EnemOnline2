@@ -36,6 +36,14 @@
     height: 90%;/*Mapeia o tamanho do index */
     margin: 0px 57px 0px 57px;
 }
+.center_content_publico {
+    position: relative;
+    //background-image: url("../imagem/backgroud_green.jpg");
+    //background: #E6E6E6;
+    padding: 5px;
+    height: 90%;/*Mapeia o tamanho do index */
+    margin: 0px 57px 0px 57px;
+}
 
 .left_content {
     background-color: #dddddd;
@@ -137,3 +145,81 @@
     color: #D20005;
 }
 
+.botao{
+    font-family: serif;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    padding: 10px;
+    cursos:pointer;
+    
+}
+.botao_green{
+     background: #72B42D;
+     box-shadow:0 5px 0 #006000;
+     color:#fff;
+     
+}
+
+.botao_green:hover{
+     background: #006000 ;
+     box-shadow:0 5px 0 #72B42D;
+     color:#fff;
+     
+}
+
+.ui-widget-content{
+    
+}
+.ui-panelgrid-cell{
+    padding: 5px !important;
+    
+}
+/*AUMENTAR ALTURA MENU*/
+.ui-menu{
+    height: 30px !important
+}
+
+.nomeAluno{
+    margin: 0px 0px 0px 75%;
+    text-transform: uppercase;
+     text-shadow: 1px 1px #dddddd;
+}
+
+
+
+/*ICONES*/
+.iconeSair   {
+    
+    background-image: url("../imagem/sair.png")     !important;
+     background-repeat: no-repeat;
+     background-size: 100%;
+}
+
+.iconePlay   {
+    
+    background-image: url("../imagem/play.png")     !important;
+     background-repeat: no-repeat;
+     background-size: 100%;
+}
+
+.iconeCorreto   {
+    
+    background-image: url("../imagem/correto.png")     !important;
+     background-repeat: no-repeat;
+     background-size: 100%;
+}
+
+.iconeAvancar   {
+    
+    background-image: url("../imagem/avancar.png")     !important;
+     background-repeat: no-repeat;
+     background-size: 100%;
+}
+
+.iconeVoltar   {
+    
+    background-image: url("../imagem/voltar.png")     !important;
+     background-repeat: no-repeat;
+     background-size: 100%;
+}

@@ -18,6 +18,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import model.Item;
 import model.Questao;
+import org.springframework.security.core.context.SecurityContextHolder;
 /**
  *
  * @author cedsobral
@@ -45,6 +46,12 @@ public class ExibeQuestaoFaces implements Serializable {
     private int erros;
     private int totalQuestoes;
     private Boolean imagemQuestao;
+    private Boolean ling_cod = false;
+    private Boolean cienc_natur =false;
+    private Boolean Cienc_human=false;
+    private Boolean Matem=false;
+    private Boolean botaoIniciar = true;
+    private Boolean botaoSair = false;
 
     public Questao getSelectedQuestao() {
         return selectedQuestao;
@@ -57,6 +64,14 @@ public class ExibeQuestaoFaces implements Serializable {
 
     public void setSelectItem(Item selectItem) {
         this.selectItem = selectItem;
+    }
+
+    public Boolean getBotaoSair() {
+        return botaoSair;
+    }
+
+    public void setBotaoSair(Boolean botaoSair) {
+        this.botaoSair = botaoSair;
     }
 
     
@@ -161,13 +176,21 @@ public class ExibeQuestaoFaces implements Serializable {
         this.imagemQuestao = imagemQuestao;
     }
 
+    public Boolean getBotaoIniciar() {
+        return botaoIniciar;
+    }
+
+    public void setBotaoIniciar(Boolean botaoIniciar) {
+        this.botaoIniciar = botaoIniciar;
+    }
+
     
 
     
    
     
     
-    public String startQuestao() {
+    public String startQuestao_ling_cod() {
 
         selectedQuestao = new Questao();
         this.selectItem_a = new Item();
@@ -181,6 +204,106 @@ public class ExibeQuestaoFaces implements Serializable {
         this.erros = 0;
         this.totalQuestoes = 0;
         this.imagemQuestao = false;
+        userLogado();
+        this.ling_cod = true;
+        //Aparece o botão Iniciar e o Sair Some e após clicar no Iniciar o Sair aparece
+        this.botaoIniciar = true;
+        this.botaoSair = false;
+        
+        System.out.println("Inicia Questao");
+        return "/publico/questoes.jsf";
+
+    }
+     public String startQuestao_cienc_natur() {
+
+        selectedQuestao = new Questao();
+        this.selectItem_a = new Item();
+        this.selectItem_b = new Item();
+        this.selectItem_c = new Item();
+        this.selectItem_d = new Item();
+        this.selectItem_e = new Item();
+        this.itens = null;
+        this.mostraquestao = false;
+        this.acertos = 0;
+        this.erros = 0;
+        this.totalQuestoes = 0;
+        this.imagemQuestao = false;
+        userLogado();
+        this.cienc_natur = true;
+         //Aparece o botão Iniciar e o Sair Some e após clicar no Iniciar o Sair aparece
+         this.botaoIniciar = true;
+         this.botaoSair = false;
+        
+        System.out.println("Inicia Questao");
+        return "/publico/questoes.jsf";
+
+    }
+      public String startQuestao_cienc_hum() {
+
+        selectedQuestao = new Questao();
+        this.selectItem_a = new Item();
+        this.selectItem_b = new Item();
+        this.selectItem_c = new Item();
+        this.selectItem_d = new Item();
+        this.selectItem_e = new Item();
+        this.itens = null;
+        this.mostraquestao = false;
+        this.acertos = 0;
+        this.erros = 0;
+        this.totalQuestoes = 0;
+        this.imagemQuestao = false;
+        userLogado();
+        this.Cienc_human = true;
+         //Aparece o botão Iniciar e o Sair Some e após clicar no Iniciar o Sair aparece
+         this.botaoIniciar = true;
+         this.botaoSair = false;
+        
+        System.out.println("Inicia Questao");
+        return "/publico/questoes.jsf";
+
+    }
+       public String startQuestao_matem() {
+
+        selectedQuestao = new Questao();
+        this.selectItem_a = new Item();
+        this.selectItem_b = new Item();
+        this.selectItem_c = new Item();
+        this.selectItem_d = new Item();
+        this.selectItem_e = new Item();
+        this.itens = null;
+        this.mostraquestao = false;
+        this.acertos = 0;
+        this.erros = 0;
+        this.totalQuestoes = 0;
+        this.imagemQuestao = false;
+        userLogado();
+        this.Matem = true;
+         //Aparece o botão Iniciar e o Sair Some e após clicar no Iniciar o Sair aparece
+         this.botaoIniciar = true;
+         this.botaoSair = false;
+        
+        System.out.println("Inicia Questao");
+        return "/publico/questoes.jsf";
+
+    }
+    
+   
+     public String startQuestao() {
+
+        selectedQuestao = new Questao();
+        this.selectItem_a = new Item();
+        this.selectItem_b = new Item();
+        this.selectItem_c = new Item();
+        this.selectItem_d = new Item();
+        this.selectItem_e = new Item();
+        this.itens = null;
+        this.mostraquestao = false;
+        this.acertos = 0;
+        this.erros = 0;
+        this.totalQuestoes = 0;
+        this.imagemQuestao = false;
+        userLogado();
+             
        
         
         
@@ -192,8 +315,23 @@ public class ExibeQuestaoFaces implements Serializable {
 
     public List<Questao> pegaQuestaoBanco() {
         this.questoes = new ArrayList<Questao>();
-        System.out.println("ID da disciplina " + String.valueOf(selectedQuestao.getDisciplina().getID()));
-        questoes = quesDAO.getQuestaoPorDiscip(selectedQuestao.getDisciplina().getID());
+        if(ling_cod){
+      //  System.out.println("ID da disciplina " + String.valueOf(selectedQuestao.getDisciplina().getID()));
+        questoes = quesDAO.getQuestaoPorDiscip(3);
+        }
+        else if(cienc_natur){
+       // System.out.println("ID da disciplina " + String.valueOf(selectedQuestao.getDisciplina().getID()));
+        questoes = quesDAO.getQuestaoPorDiscip(4);
+        }
+         else if(Cienc_human){
+         System.out.println("ID da disciplina " + String.valueOf(selectedQuestao.getDisciplina().getID()));
+         questoes = quesDAO.getQuestaoPorDiscip(5);  
+         }
+        else if(Matem){
+       //  System.out.println("ID da disciplina " + String.valueOf(selectedQuestao.getDisciplina().getID()));
+         questoes = quesDAO.getQuestaoPorDiscip(6);  
+         }
+      
         return questoes;
 
     }
@@ -356,7 +494,8 @@ public class ExibeQuestaoFaces implements Serializable {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Desculpe, esta disciplina não tem Questões cadastradas", null);
              FacesContext.getCurrentInstance().addMessage("message", message);  
         }
-
+        this.botaoIniciar = false;
+        this.botaoSair = true;
     }
 
    
@@ -415,6 +554,15 @@ public class ExibeQuestaoFaces implements Serializable {
         
     }
     
+     public void userLogado(){
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println(login);
+    }
+    
+     
+     public String sairQuestoes(){
+         return "/publico/index.jsf";
+     }
     
     
 

@@ -20,6 +20,7 @@ import javax.inject.Inject;
 import model.Aluno;
 import model.Escola;
 import org.primefaces.event.RowEditEvent;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -35,6 +36,7 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
     private List<Escola> escolas;
     private List nivelAcessoUsuario;
     private List nivelAcessoAluno;
+    
     
     //Chamada dos DAO's
     @Inject
@@ -207,6 +209,14 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
+    
+    public void userLogado(){
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        this.alunos = null;
+        this.alunos = alunoDAO.getAlunobyLogin(login);
+        this.selectedAluno = this.alunos.get(0);
+        System.out.println(this.selectedAluno.getNome());
+    }
     
    
     

@@ -42,7 +42,7 @@
                               <h:inputText value="#{questaoFaces.selectedQuestao.imagem}"  id="txtimagem"  size="120"/>
                             <h:outputText value="Descrição da Questão.:" />
                             <h:inputTextarea value="#{questaoFaces.selectedQuestao.texto}" rows="4" cols="50" id="txtQuestao" />
-
+                            
 
                         </p:panelGrid>
                          </center>
@@ -56,6 +56,8 @@
 
                         </p:panel>
                         <br/>
+                        
+                        
                         <p:dataTable id="questoes" var="q" value="#{questaoFaces.questoes}" editable="true" style="margin-bottom:20px;text-align: center"
                                      paginator="true"
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

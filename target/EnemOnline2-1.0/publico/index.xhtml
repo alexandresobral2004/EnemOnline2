@@ -1,7 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -10,6 +13,42 @@
            
 
             <ui:define name="content">
+                <h:form id="formPulico">
+                    
+                    <br/><br/>
+                    <div class="nomeAluno">
+                        <h:outputText value="#{alunoFaces.userLogado()}"/>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Seja Bem-Vindo: "/>
+                            <h:outputText value="#{alunoFaces.selectedAluno.login}"/>
+                        </h:panelGrid>
+                        
+                    </div>
+                    <br/>
+                    <br/>
+                    <center>
+                        
+                   
+                    <p:panelGrid columns="4">
+                        <f:facet name="header">
+                            <h3>Clique no botão da área desejada!</h3>
+                        </f:facet>
+                        
+                        <p:commandButton action="#{exibeQuestaoFaces.startQuestao_ling_cod()}" ajax="false" value="Linguagens e Códigos e suas Tecnologias" class="botao botao_green "/>
+                        <p:commandButton action="#{exibeQuestaoFaces.startQuestao_cienc_natur()}" ajax="false" value="Ciências da Natureza e suas Tecnologias" class="botao botao_green "/>
+                        <p:commandButton action="#{exibeQuestaoFaces.startQuestao_cienc_hum()}" ajax="false" value="Ciências Humanas e suas Tecnologias" class="botao botao_green "/>
+                        <p:commandButton action="#{exibeQuestaoFaces.startQuestao_matem()}" ajax="false" value="Matemática e suas Tecnlogias" class="botao botao_green"/>
+                        
+                    </p:panelGrid>
+                     </center>
+                </h:form>
+                <br/><br/>
+                <h:form>
+                    <p:menubar style="margin-left: 92%; margin-right:0%; height: 25px !important; ">
+                     
+                        <p:menuitem value="Sair"   url="/j_spring_security_logout" action="logout.jsf"  icon="iconeSair" />
+                </p:menubar>
+                </h:form>
                 
             </ui:define>
 

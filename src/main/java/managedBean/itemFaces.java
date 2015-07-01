@@ -170,7 +170,7 @@ public class itemFaces implements Serializable {
         carregaQuestoes();
 
         System.out.println("Cadastro de Itens iniciado");
-        return "/admin/Itens.jsf";
+        return "/admin/Cad_Itens.jsf";
     }
     
     public void findItensEdicao() {
@@ -327,7 +327,7 @@ public class itemFaces implements Serializable {
         
         
         System.out.println("Itens Inseridos");
-        return "/admin/questao.jsf";
+        return "/admin/Cad_questao.jsf";
 
     }
 

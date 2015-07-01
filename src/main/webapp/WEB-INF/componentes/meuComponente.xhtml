@@ -36,21 +36,23 @@
                 
                 </wsosft:ifAnyGranted>
                 
-                <wsosft:ifAnyGranted roles="ESCOLA,ADMIN">
+                <wsosft:ifAnyGranted roles="ADMIN">
 
 
 
                     <p:submenu label="Questões">
 
-                        <p:menuitem value="Iniciar"   action="#{exibeQuestaoFaces.startQuestao()}" ajax="false" />
+                        <p:menuitem value="Iniciar"   action="#{exibeQuestaoFaces.startQuestao()}" ajax="false"  />
 
                     </p:submenu>
-                </wsosft:ifAnyGranted>
+                
 
                 
                
 
-                <p:menuitem value="Sair"   url="/j_spring_security_logout" action="logout.jsf"  />
+                <p:menuitem value="Sair"   url="/j_spring_security_logout" action="logout.jsf"  icon="iconeSair" />
+                
+                </wsosft:ifAnyGranted>
             </p:menubar>
 
 

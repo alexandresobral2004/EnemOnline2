@@ -44,6 +44,11 @@ public class AlunoDAO extends DAO<Aluno, Long> implements Serializable{
        return alunos;
     }
     //"SELECT i FROM Aluno i where i.questao_id='"+id+"' ",id
+    
+     public List<Aluno> getAlunobyLogin(String login) {
+       List<Aluno> alunos = getAlunobyLogin(Aluno.class, "SELECT a FROM Aluno a WHERE a.login=:login", login);
+       return alunos;
+    }
      
     
 }

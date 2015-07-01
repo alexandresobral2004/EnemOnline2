@@ -80,6 +80,17 @@ public abstract class DAO<T, PK extends Serializable> implements Serializable {
 
         return toReturn;
     }
+     
+      public <T> List<T> getAlunobyLogin(Class<T> entityClass, String jpql, String value) {
+      //  em = getEntityManager();
+        List toReturn = null;
+        Query query = em.createQuery(jpql);
+        query.setParameter("login", value);
+      
+        toReturn = query.getResultList();
+
+        return toReturn;
+    }
     
     
     public <T> List<T> getItensByQuestao(Class<T> entityClass,String jpql, int id) {
@@ -99,6 +110,8 @@ public abstract class DAO<T, PK extends Serializable> implements Serializable {
         result = (Integer) query.getSingleResult();
         return result;
     }
+    
+     
     
     public <T> List<T> getQuestaobyDisciplina(Class<T> entityClass,String jpql,int id){
         // em = getEntityManager();

@@ -151,7 +151,7 @@ public class QuestaoFaces implements Serializable{
          findAllQuestaoes();//Carrega a lista de questões cadastradas
          carregaDisciplinas();//carrega a lista de disciplinas
         System.out.println("Inicia Questão");
-        return "/admin/questao.jsf";
+        return "/admin/Cad_questao.jsf";
     } 
     
     public QuestaoFaces() {
@@ -188,7 +188,8 @@ public class QuestaoFaces implements Serializable{
     public void newQuestao(){
      
       this.selectedQuestao = new Questao();
-       this.selectedQuestao.setImagem("sem imagem");
+       this.selectedQuestao.setImagem(".");
+        this.newFileName_A = null;
       //incrementaNumQuestao();
       
     }
@@ -206,7 +207,7 @@ public class QuestaoFaces implements Serializable{
           
         FacesMessage msg = new FacesMessage("Questão Editada",null);
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        return "/admin/questao.jsf";
+        return "/admin/Cad_questao.jsf";
     }
      
     public void onCancel(RowEditEvent event) {

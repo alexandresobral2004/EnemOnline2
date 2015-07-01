@@ -56,7 +56,7 @@ public class disciplinaFaces implements Serializable{
     
     public String startDisciplina(){
         this.selectedDisci = new Disciplina();
-        return "/admin/disciplina";
+        return "/admin/Cad_disciplina";
     }
 
     
