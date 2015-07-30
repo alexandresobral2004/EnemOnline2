@@ -21,13 +21,13 @@
                                 Cadastro de Escolas
                             </f:facet>
                             <h:outputText value="Nome.:"/>
-                            <p:inputText value="#{escolaFaces.selectedEscola.nome}" maxlength="150" size="100"/>
+                            <p:inputText value="#{escolaFaces.selectedEscola.nome}" maxlength="150" size="100" required="true"/>
                             <h:outputText value="Município.:"/>
-                            <p:inputText value="#{escolaFaces.selectedEscola.cidade}" maxlength="50" size="50"/>
+                            <p:inputText value="#{escolaFaces.selectedEscola.cidade}" maxlength="50" size="50" required="true" />
                             <h:outputText value="E-mail.:"/>
-                            <p:inputText value="#{escolaFaces.selectedEscola.email}" maxlength="60" size="60"/>
+                            <p:inputText value="#{escolaFaces.selectedEscola.email}" maxlength="60" size="60" required="true" />
                             <h:outputText value="Fone.:"/>
-                            <p:inputMask mask="(99)9999-9999" value="#{escolaFaces.selectedEscola.fone}" size="15"  />
+                            <p:inputMask mask="(99)9999-9999" value="#{escolaFaces.selectedEscola.fone}" size="15" required="true" />
                         </p:panelGrid>
                         <br/><br/>
                         <p:panel>

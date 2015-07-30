@@ -185,12 +185,13 @@ public class QuestaoFaces implements Serializable{
         }
     }
     
-    public void newQuestao(){
+    public String newQuestao(){
      
       this.selectedQuestao = new Questao();
        this.selectedQuestao.setImagem(".");
         this.newFileName_A = null;
       //incrementaNumQuestao();
+        return "/admin/Cad_questao.jsf";
       
     }
     

@@ -20,12 +20,16 @@
                             Cadastro de Disciplinas
                         </f:facet>
                         <h:outputText value="Nome da Discplina.:"/>
-                        <p:inputText value="#{disciplinaFaces.selectedDisci.nome}"/>
+                        <p:inputText value="#{disciplinaFaces.selectedDisci.nome}" required="true" >
+                        <f:validateLength minimum="4" />
+                        </p:inputText>
                     </p:panelGrid>
                     <br/>
                     <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
                         <p:commandButton action="#{disciplinaFaces.newObject()}" value="Novo" ajax="false" />
-                    <p:commandButton value="Gravar" action="#{disciplinaFaces.addDisciplina()}"  update="disci:message"/>
+                        <p:commandButton value="Gravar" action="#{disciplinaFaces.addDisciplina()}"  update="disci:message">
+                             <f:ajax execute="@form" render="message"/>
+                        </p:commandButton>
                     </p:panel>
                     </center>
                 </h:form>

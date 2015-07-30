@@ -17,44 +17,74 @@
                     <center>
                         <!--CRIAR OUTRO OBJETO SELECTALUMO PARA JÁ DEIXAR SETADO O NÍVEL DOS ALUNOS-->
                     
-                    <p:panelGrid columns="2">
+                     <p:panelGrid columns="3" id="cadAluno">
                         <f:facet name="header">
                             Cadastro de Alunos
                         </f:facet>
-                        <h:outputText value="Nome.:"/>
-                        <p:inputText value="#{alunoFaces.selectedAluno.nome}"  maxlength="150" size="100"/>
-                        <h:outputText value="Login.:"/>
-                        <p:inputText value="#{alunoFaces.selectedAluno.login}"  maxlength="30" size="30"/>
-                        <h:outputText value="Senha.:"/>
-                        <p:password value="#{alunoFaces.selectedAluno.senha}"  maxlength="30" size="30"/>
-                        <h:outputText value="Confirma Senha.:"/>
-                        <p:password value="#{alunoFaces.selectedAluno.confirmaSenha}"  maxlength="30" size="30"/>
+                         <p:outputLabel for="nome" value="Nome.:"/>
+                        <p:inputText value="#{alunoFaces.selectedAluno.nome}"  id="nome" maxlength="150" size="100" required="true">
+                            <f:validateLength minimum="2" />
+                              <f:ajax event="blur" render="messageNome"/>
+                        </p:inputText>
+                         <p:message for="nome" display="icon"    id="messageNome"/>
+                        
+                        <p:outputLabel for="login" value="Login.:"/>
+                        <p:inputText value="#{alunoFaces.selectedAluno.login}"  id="login"  maxlength="30" size="30" required="true">
+                            <f:ajax event="blur" render="messageLogin"/>
+                        </p:inputText>
+                        <p:message for="login" display="icon"  id="messageLogin"/>
+                         
+                        <p:outputLabel for="senha" value="Senha.:"/>
+                        <p:password value="#{alunoFaces.selectedAluno.senha}" id="senha" maxlength="30" size="30" required="true">
+                         <f:ajax event="blur" render="messageSenha" />
+                        </p:password>
+                        <p:message for="senha" display="icon" id="messageSenha" />
+                        
+                          <p:outputLabel for="confirmaSenha" value="Confirmar Senha.:"/>
+                          <p:password value="#{alunoFaces.selectedAluno.confirmaSenha}" id="confirmaSenha" maxlength="30" size="30" required="true">
+                              <f:ajax event="blur" render="messageConfirma" />
+                          </p:password>
+                          <p:message for="confirmaSenha" display="icon" id="messageConfirma" />
+                        
                          <h:outputText value="Nível Acesso.:"/>
-                         <p:inputText value="#{alunoFaces.selectedAluno.authority}" maxlength="12" size="12" disabled="true"/>
-                        <h:outputText value="E-mail.:"/>
-                        <p:inputText value="#{alunoFaces.selectedAluno.email}" maxlength="60" size="60"/>
-
-                        <h:outputText value="CPF.:"/>
-                        <p:inputMask mask="999.999.999-99" value="#{alunoFaces.selectedAluno.cpf}" size="14"/>
-
-                        <h:outputText value="Data de Nascimento.:"/>
-                        <p:inputMask mask="99/99/9999" value="#{alunoFaces.selectedAluno.dtNasc}" size="10">
+                         <p:inputText value="#{alunoFaces.selectedAluno.authority}"  maxlength="12" size="12" disabled="true"/>
+                         <p:message for="nome" display="icon" /> 
+                        
+                           <p:outputLabel for="email" value="E-mail.:"/>
+                           <p:inputText value="#{alunoFaces.selectedAluno.email}" id="email"   maxlength="60" size="60" required="true">
+                                <f:ajax event="blur" render="messageEmail"  />
+                           </p:inputText>
+                           <p:message for="email" display="icon"  id="messageEmail"/> 
+                        
+                          <p:outputLabel for="cpf" value="CPF.:"/>
+                          <p:inputMask mask="999.999.999-99" value="#{alunoFaces.selectedAluno.cpf}"  id="cpf" size="14" required="true">
+                               <f:ajax event="blur" render="messageCPF"  />
+                          </p:inputMask>
+                          <p:message for="cpf" display="icon" id="messageCPF" />
+                        
+                           <p:outputLabel for="data" value="Data de Nascimento.:"/>
+                        <p:inputMask mask="99/99/9999" value="#{alunoFaces.selectedAluno.dtNasc}" id="data" size="10" required="true">
                             <f:convertDateTime parent="dd/MM/yyyy" dateStyle="short"  timeZone="America/Sao_Paulo"/>
+                            <f:ajax event="blur" render="messageData"  />
                         </p:inputMask>
-
-                        <h:outputText value="Escola.:"/>
-                        <p:selectOneMenu value="#{alunoFaces.selectedAluno.escola}" converter="EscolaConverter" >
+                           <p:message for="data" display="icon" id="messageData" />
+                        
+                         <h:outputText value="Escola.:"/>
+                        <p:selectOneMenu value="#{alunoFaces.selectedAluno.escola}" id="escola" converter="EscolaConverter"  required="true">
                             <f:selectItems value="#{alunoFaces.escolas}" var="esc" itemLabel="#{esc.nome}" itemValue="#{esc}"/>
 
                         </p:selectOneMenu>
 
-
-                    </p:panelGrid>
+                     </p:panelGrid>
+                   
                    
                     <br/><br/>
-                    <p:panel>
-                        <p:commandButton action="#{alunoFaces.newAluno()}" value="Novo"  ajax="false"/>
-                        <p:commandButton action="#{alunoFaces.add()}" value="Gravar" update=":formAluno:message" />
+                     <p:panel>
+                        <p:commandButton action="#{alunoFaces.newAluno()}" value="Novo"  />
+                        <p:commandButton action="#{alunoFaces.add()}" value="Salvar" update=":formAluno:message,:formAluno:cadAluno"  >
+                            <f:ajax execute="@form" render="message"/>
+                        </p:commandButton>
+                        <p:commandButton action="#{alunoFaces.sairCadastroAluno()}" icon="iconeVoltar" value="Sair" ajax="false" immediate="true" />
 
                     </p:panel>
                      </center>

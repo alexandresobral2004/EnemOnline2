@@ -1,3 +1,7 @@
+* {
+    margin: 0px;
+    padding:0px;
+}
 
 #top {
     position: relative;
@@ -31,7 +35,7 @@
 .center_content {
     position: relative;
     //background-image: url("../imagem/backgroud_green.jpg");
-    background: #E6E6E6;
+    
     padding: 5px;
     height: 90%;/*Mapeia o tamanho do index */
     margin: 0px 57px 0px 57px;
@@ -95,7 +99,9 @@
 .padrao_entrada{
     background-image: url("../imagem/planodefundo.jpg") ;
     background-repeat: no-repeat;
+  
     background-size: 100%;
+    
     
    
 }
@@ -116,11 +122,10 @@
     height: 180px;
     font-size: 14px;
     float:right; 
-    position: absolute;
-    margin-top: 20%;
-    margin-right:0; 
-    margin-bottom:0px;
-    margin-left:65%; 
+    position: relative;
+    top:220px;
+    right:0px;
+    
     
     
    
@@ -186,6 +191,128 @@
      text-shadow: 1px 1px #dddddd;
 }
 
+
+
+.modalDialog {
+position: relative;
+font-family: Arial, Helvetica, sans-serif;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+background: rgba(0,0,0,0.5);
+z-index: 99999;
+opacity:0;
+-webkit-transition: opacity 400ms ease-in;
+-moz-transition: opacity 400ms ease-in;
+transition: opacity 400ms ease-in;
+pointer-events: none;
+overflow:scroll; /* activa scroll da página se a modal for muito comprida */
+}
+.modalDialog:target {
+opacity:30;
+pointer-events: auto;
+}
+ 
+.modalDialog > div {
+width: 800px;
+position: relative;
+margin: 5% auto;
+padding: 10px 20px 13px 20px;
+border-radius: 10px;
+background: #fff;
+background: -moz-linear-gradient(#fff, #999);
+background: -webkit-linear-gradient(#fff, #999);
+background: -o-linear-gradient(#fff, #999);
+ 
+-moz-box-shadow: 1px 1px 30px #000;
+-webkit-box-shadow: 1px 1px 30px #000;
+box-shadow: 1px 1px 30px #000;
+}
+
+.close {
+padding: 5px;
+overflow: hidden;
+background: #3f481e;
+color: #FFF !important;
+line-height: 25px;
+position: relative;
+left:-17%;
+text-align: left;
+top: 40%;
+width: 310px;
+height: 160px;
+margin: 20% 10% 20% 50%;
+font-weight: bold;
+-webkit-border-radius: 12px;
+-moz-border-radius: 12px;
+border-radius: 12px;
+-moz-box-shadow: 1px 1px 3px #000;
+-webkit-box-shadow: 1px 1px 3px #000;
+box-shadow: 1px 1px 3px #000;
+}
+
+.fielSetLogin{
+    color: #FFF;
+    border: #000000;
+    
+}
+.login{
+    position:relative;
+    left:10px;
+    
+}
+
+
+.legendLogin{
+    background: #72B42D;
+    background-position:top center;
+    margin: 0px 0px 10px 0px; 
+    
+    color: #FFF;
+    text-align: center;
+    width: 100%;
+   
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+}
+
+.body_template{
+    border:  3px outset black;
+    box-shadow: 0px 10px 10px 2px #CDC9C9;
+    height:100%;
+    margin:10px;
+    
+    
+}
+
+
+
+.botaoLogin{
+   font-size: 20px;
+   font-family: "Arial";   
+   width: 80px; 
+   height:30px;
+   position:relative;
+   top:15px;
+   left:200px;
+   clear:left;
+   right:0px;
+   bottom:0px;
+   /*CANTOS ARREDONDADOS*/
+   
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    
+   
+   
+   
+}
+.botaoLogin:hover{
+    background-color: yellow;
+}
 
 
 /*ICONES*/

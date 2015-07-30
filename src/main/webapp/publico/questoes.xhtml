@@ -33,8 +33,9 @@
                         
                     <p:panel id="basic" header="Questões preparatórias para o ENEM" footer="CED - CENTRO DE EDUCAÇÃO A DISTÂNCIA DO CEARÁ" style="margin-bottom:20px">
 
-                        <h:outputText value="#{exibeQuestaoFaces.selectedQuestao.tema}"/><br/><br/>
-                        <h:outputText value="#{exibeQuestaoFaces.selectedQuestao.texto}" id="texto"  class="textoQuestao" />
+                        <h:outputText value="#{exibeQuestaoFaces.selectedQuestao.disciplina.nome}"/><br/><br/>
+                        <h:outputText value="#{exibeQuestaoFaces.selectedQuestao.texto}" id="texto"  class="textoQuestao" escape="false" />
+                        
                         <br/>
                         <br/>
                         <center>
@@ -46,32 +47,37 @@
                         <p:panelGrid columns="3" id="itens"  rendered="#{exibeQuestaoFaces.mostraquestao}" class="ui-widget-content2" >
                             <h:outputText value="#{exibeQuestaoFaces.selectItem_a.item}"/>
                             <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_a.itemMarcado}" id="a" >
-                                <p:ajax update="exibe:itens" listener="#{exibeQuestaoFaces.selectOneitem_a()}" />
+                                <p:ajax   update="exibe:itens"  listener="#{exibeQuestaoFaces.selectOneitem_a()}"  />
+                               
                             </p:selectBooleanCheckbox>
                             <h:outputText value="#{exibeQuestaoFaces.selectItem_a.textoitemQuestao}" />
 
 
                             <h:outputText value="#{exibeQuestaoFaces.selectItem_b.item}"/>
                             <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_b.itemMarcado}" id="b" >
-                                <p:ajax update="exibe:itens" listener="#{exibeQuestaoFaces.selectOneitem_b()}" />
+                                 <p:ajax   update="exibe:itens"  listener="#{exibeQuestaoFaces.selectOneitem_b()}" />
+                               
                             </p:selectBooleanCheckbox>
                             <h:outputText value="#{exibeQuestaoFaces.selectItem_b.textoitemQuestao}" />
 
                             <h:outputText value="#{exibeQuestaoFaces.selectItem_c.item}"/>
                             <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_c.itemMarcado}" id="c" >
-                                <p:ajax update="exibe:itens" listener="#{exibeQuestaoFaces.selectOneitem_c()}" />
+                               <p:ajax   update="exibe:itens" listener="#{exibeQuestaoFaces.selectOneitem_c()}"   />
+                               
                             </p:selectBooleanCheckbox>
                             <h:outputText value="#{exibeQuestaoFaces.selectItem_c.textoitemQuestao}" />
 
                             <h:outputText value="#{exibeQuestaoFaces.selectItem_d.item}"/>
                             <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_d.itemMarcado}" id="d" >
-                                <p:ajax update="exibe:itens" listener="#{exibeQuestaoFaces.selectOneitem_d()}" />
+                                <p:ajax   update="exibe:itens" listener="#{exibeQuestaoFaces.selectOneitem_d()}"   />
+                                
                             </p:selectBooleanCheckbox>
                             <h:outputText value="#{exibeQuestaoFaces.selectItem_d.textoitemQuestao}" />
 
                             <h:outputText value="#{exibeQuestaoFaces.selectItem_e.item}"/>
-                            <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_e.itemMarcado}" id="e" >
-                                <p:ajax update="exibe:itens" listener="#{exibeQuestaoFaces.selectOneitem_e()}" />
+                            <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_e.itemMarcado}" id="e"     >
+                                 <p:ajax   update="exibe:itens"  listener="#{exibeQuestaoFaces.selectOneitem_e()}"  />
+                               
                             </p:selectBooleanCheckbox>
                             <h:outputText value="#{exibeQuestaoFaces.selectItem_e.textoitemQuestao}" />   
 

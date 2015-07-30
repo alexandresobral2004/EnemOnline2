@@ -17,10 +17,10 @@
                     
                     <br/><br/>
                     <div class="nomeAluno">
-                        <h:outputText value="#{alunoFaces.userLogado()}"/>
+                        
                         <h:panelGrid columns="2">
                             <h:outputText value="Seja Bem-Vindo: "/>
-                            <h:outputText value="#{alunoFaces.selectedAluno.login}"/>
+                            <h:outputText value="#{alunoFaces.userLogado().nome}" />
                         </h:panelGrid>
                         
                     </div>
@@ -31,6 +31,7 @@
                    
                     <p:panelGrid columns="4">
                         <f:facet name="header">
+                            
                             <h3>Clique no botão da área desejada!</h3>
                         </f:facet>
                         

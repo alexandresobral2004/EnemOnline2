@@ -41,7 +41,9 @@
                             <h:outputText value="Caminho da Imagem.:" />
                               <h:inputText value="#{questaoFaces.selectedQuestao.imagem}"  id="txtimagem"  size="120"/>
                             <h:outputText value="Descrição da Questão.:" />
-                            <h:inputTextarea value="#{questaoFaces.selectedQuestao.texto}" rows="4" cols="50" id="txtQuestao" />
+                            <p:editor id="txtQuestao" widgetVar="editorWidget" value="#{questaoFaces.selectedQuestao.texto}" width="600" />
+ 
+                           
                             
 
                         </p:panelGrid>
@@ -50,8 +52,10 @@
 
           
                         <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
-                            <p:commandButton value="Novo" action="#{questaoFaces.newQuestao()}" ajax="false" />
-                            <p:commandButton value="Gravar" action="#{questaoFaces.addQuestao()}" ajax="false" />
+                            <p:commandButton value="Novo" action="#{questaoFaces.newQuestao()}" ajax="false"  immediate="true"/>
+                            <p:commandButton value="Gravar" action="#{questaoFaces.addQuestao()}" ajax="false" >
+                                <f:ajax execute="@all" render="questoes"/>
+                            </p:commandButton>
 
 
                         </p:panel>
@@ -95,7 +99,7 @@
                             <p:column headerText="Texto Questão" resizable="true">
                                 <p:cellEditor>
                                     <f:facet name="output">
-                                        <h:outputText value="#{q.texto}" style="font-size: 11px" />
+                                        <h:outputText value="#{q.texto}" style="font-size: 11px" escape="false" />
 
                                     </f:facet>
                                     <f:facet name="input">

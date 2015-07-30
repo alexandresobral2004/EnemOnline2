@@ -7,9 +7,9 @@
     <class>model.Item</class>
     <class>model.Prova</class>
     <class>model.Questao</class>
-    <class>model.prova_questao</class>
     <class>model.Escola</class>
     <class>model.Aluno</class>
+    <class>model.aluno_questao</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
     <properties>
@@ -17,6 +17,7 @@
       <property name="hibernate.connection.datasource" value="jdbc/enem"/>
       <property name="hibernate.transaction.factory_class" value="org.hibernate.transaction.JTATransactionFactory"/>
       <property name="hibernate.connection.autocommit" value="false"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

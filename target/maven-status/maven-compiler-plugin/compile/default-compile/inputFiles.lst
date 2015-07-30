@@ -9,6 +9,7 @@
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/dao/ItemDAO.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/Util/DatabaseUtil.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/managedBean/QuestaoFaces.java
+/Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/dao/aluno_questaoDAO.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/dao/QuestaoDAO.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/dao/AlunoDAO.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/Converter/DisciplinaConverter.java
@@ -20,7 +21,7 @@
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/model/Escola.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/managedBean/disciplinaFaces.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/managedBean/InterfacePadrao.java
+/Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/model/aluno_questao.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/dao/DAO.java
-/Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/model/prova_questao.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/Util/JPAFilter.java
 /Users/cedsobral/NetBeansProjects/EnemOnline2/src/main/java/managedBean/ExibeQuestaoFaces.java

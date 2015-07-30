@@ -22,44 +22,44 @@
                             Cadastro de Alunos
                         </f:facet>
                         <h:outputText value="Nome.:"/>
-                        <p:inputText value="#{alunoFaces.selectedAluno.nome}"  maxlength="150" size="100"/>
+                        <p:inputText value="#{alunoFaces.selectedAluno.nome}"  maxlength="150" size="100" id="Nome" required="true"/>
                         <h:outputText value="Login.:"/>
-                        <p:inputText value="#{alunoFaces.selectedAluno.login}"  maxlength="30" size="30"/>
+                        <p:inputText value="#{alunoFaces.selectedAluno.login}"  maxlength="30" size="30" id="Login" required="true"/>
                         <h:outputText value="Senha.:"/>
-                        <p:password value="#{alunoFaces.selectedAluno.senha}"  maxlength="30" size="30"/>
+                        <p:password value="#{alunoFaces.selectedAluno.senha}"  maxlength="30" size="30" id="Senha" required="true"/>
                         <h:outputText value="Confirma Senha.:"/>
-                        <p:password value="#{alunoFaces.selectedAluno.confirmaSenha}"  maxlength="30" size="30"/>
-
-                         <h:outputText value="Nível Acesso.:"/>
-                         <p:selectOneMenu value="#{alunoFaces.selectedAluno.authority}"  >
-                             <f:selectItems value="#{alunoFaces.nivelAcessoUsuario}"/>
-                         </p:selectOneMenu>
-                        
+                        <p:password value="#{alunoFaces.selectedAluno.confirmaSenha}"  maxlength="30" size="30" id="ConfirmaSenha" required="true"/>
+                         <h:outputText value="Nível Acesso.:(ADMIN/ESCOLA)"/>
+                         <p:inputText value="#{alunoFaces.selectedAluno.authority}" maxlength="12" size="12" id="Authority" required="true"/>
                         <h:outputText value="E-mail.:"/>
-                        <p:inputText value="#{alunoFaces.selectedAluno.email}" maxlength="60" size="60"/>
-                        
+                        <p:inputText value="#{alunoFaces.selectedAluno.email}" maxlength="60" size="60" required="true">
+                        <f:validateLength minimum="8" />
+                        </p:inputText>
 
                         <h:outputText value="CPF.:"/>
-                        <p:inputMask mask="999.999.999-99" value="#{alunoFaces.selectedAluno.cpf}" size="14"/>
+                        <p:inputMask mask="999.999.999-99" value="#{alunoFaces.selectedAluno.cpf}" size="14" required="true"/>
 
                         <h:outputText value="Data de Nascimento.:"/>
-                        <p:inputMask mask="99/99/9999" value="#{alunoFaces.selectedAluno.dtNasc}" size="10">
+                        <p:inputMask mask="99/99/9999" value="#{alunoFaces.selectedAluno.dtNasc}" size="10" required="true">
                             <f:convertDateTime parent="dd/MM/yyyy" dateStyle="short"  timeZone="America/Sao_Paulo"/>
                         </p:inputMask>
 
                         <h:outputText value="Escola.:"/>
-                        <p:selectOneMenu value="#{alunoFaces.selectedAluno.escola}" converter="EscolaConverter" >
+                        <p:selectOneMenu value="#{alunoFaces.selectedAluno.escola}" converter="EscolaConverter"  required="true">
                             <f:selectItems value="#{alunoFaces.escolas}" var="esc" itemLabel="#{esc.nome}" itemValue="#{esc}"/>
 
                         </p:selectOneMenu>
 
 
                     </p:panelGrid>
-                   
                     <br/><br/>
                     <p:panel>
-                        <p:commandButton action="#{alunoFaces.newAluno()}" value="Novo"  ajax="false"/>
-                        <p:commandButton action="#{alunoFaces.add()}" value="Gravar" update=":formAluno:message,:formAluno:dtAluno" />
+                        <p:commandButton action="#{alunoFaces.startFaces()}" value="Novo" ajax="false"  immediate="true"  >
+                           
+                        </p:commandButton>
+                        <p:commandButton action="#{alunoFaces.add()}" value="Gravar" update=":formAluno:message,:formAluno:dtAluno" >
+                             <f:ajax execute="@form" render="message"/>
+                        </p:commandButton>
 
                     </p:panel>
                      </center>
@@ -143,13 +143,13 @@
 
 
                         <p:column style="width:50px" headerText="Editar">
-                            <p:commandButton   icon="ui-icon-pencil" action="#{alunoFaces.startEditAluno()}"   >
+                            <p:commandButton   icon="ui-icon-pencil" action="#{alunoFaces.startEditAluno()}" immediate="true"  >
                                 <f:setPropertyActionListener value="#{alu}" target="#{alunoFaces.selectedAluno}"  />
                                   
                                 </p:commandButton>     
                         </p:column>
                         <p:column style="width:40px" headerText="Apagar">
-                            <p:commandButton action="#{alunoFaces.del}" icon="ui-icon-trash" ajax="false">
+                            <p:commandButton action="#{alunoFaces.del}" icon="ui-icon-trash" ajax="false" immediate="true">
                                 <f:setPropertyActionListener value="#{alu}" target="#{alunoFaces.selectedAluno}"/>
                             </p:commandButton>
                         </p:column>

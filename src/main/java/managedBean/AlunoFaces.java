@@ -102,10 +102,10 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
     }
     
      public String startEditAluno(){
-        return "/aluno/editAluno.jsf";
+        return "/admin/editAluno.jsf";
     }
      
-      @Override
+    @Override
     public String startFaces() {
        this.selectedAluno = new Aluno();
       permissoes();
@@ -210,16 +210,19 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
     }
     
     
-    public void userLogado(){
+    public Aluno userLogado(){
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
         this.alunos = null;
         this.alunos = alunoDAO.getAlunobyLogin(login);
         this.selectedAluno = this.alunos.get(0);
         System.out.println(this.selectedAluno.getNome());
+        return this.selectedAluno;
     }
     
    
-    
+    public String sairCadastroAluno(){
+          return "/entrada.jsf";
+    }
     
     
 }

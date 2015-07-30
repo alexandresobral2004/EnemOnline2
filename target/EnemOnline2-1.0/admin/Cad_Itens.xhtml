@@ -113,7 +113,9 @@
                    <br/>
                    <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
                        <p:commandButton action="#{itemFaces.newItem()}" value="Novo" ajax="false"/>
-                       <p:commandButton action="#{itemFaces.addItem()}" value="Gravar" ajax="false" update="item:message" />
+                       <p:commandButton action="#{itemFaces.addItem()}" value="Gravar"  ajax="false" >
+                           <f:ajax execute="@form" render="message"/>
+                       </p:commandButton>
                    </p:panel>
                       
 

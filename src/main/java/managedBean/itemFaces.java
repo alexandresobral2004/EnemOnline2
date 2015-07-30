@@ -207,10 +207,10 @@ public class itemFaces implements Serializable {
             this.itemDAO.editItem(this.selectItem_d);
             this.itemDAO.editItem(this.selectItem_e);
             selectQuestao = new Questao();
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "null", "Dados Atualizados com Sucesso!!");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Dados Atualizados com Sucesso!!", "Dados Atualizados com Sucesso!!");
             FacesContext.getCurrentInstance().addMessage("message", message);
         } catch (Exception ex) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "null", "Erro ao Atualizar Dados!!");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao Atualizar Dados!!", "Erro ao Atualizar Dados!!");
             FacesContext.getCurrentInstance().addMessage("message", message);
             Logger.getLogger(itemFaces.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -316,7 +316,9 @@ public class itemFaces implements Serializable {
             itemDAO.addItem(selectItem_c);
             itemDAO.addItem(selectItem_d);
             itemDAO.addItem(selectItem_e);
-            carregaQuestoes();//
+            carregaQuestoes();// atualiza a lista de questoes
+            newItem();//Zera os itens e a questao
+            
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ítens Gravados com Sucesso", "Dados Gravados Com Sucesso!!");
             FacesContext.getCurrentInstance().addMessage("message", message);
         }
@@ -325,6 +327,7 @@ public class itemFaces implements Serializable {
             FacesContext.getCurrentInstance().addMessage("message", message);
         }
         
+            
         
         System.out.println("Itens Inseridos");
         return "/admin/Cad_questao.jsf";
