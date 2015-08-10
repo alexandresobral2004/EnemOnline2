@@ -18,7 +18,6 @@ import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.persistence.RollbackException;
 import model.Escola;
-import org.eclipse.persistence.exceptions.DatabaseException;
 import org.postgresql.util.PSQLException;
 import org.primefaces.event.RowEditEvent;
 
@@ -101,15 +100,11 @@ public class EscolaFaces implements Serializable, InterfacePadrao {
               getAllEscolas();
                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Escola Apagada!", null);
             FacesContext.getCurrentInstance().addMessage("message", message);
-        } catch (DatabaseException ex) {
+        } catch (Exception ex) {
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Escola não pode ser apagada, está vinculada a alunos!", null);
             FacesContext.getCurrentInstance().addMessage("message", message);
            
-        } catch (Exception ex) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Escola não pode ser apagada, está vinculada a alunos!", null);
-            FacesContext.getCurrentInstance().addMessage("message", message);
-            Logger.getLogger(EscolaFaces.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
           
       
     

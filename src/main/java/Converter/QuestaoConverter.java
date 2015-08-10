@@ -28,7 +28,9 @@ public class QuestaoConverter implements Converter{
         try
         {
          q  = quesDAO.getQuestaoByID(id);
+          System.out.println(String.valueOf(q.getId()));
          return q;
+           
         }
         catch(Exception e){
             System.out.println("ERRO AO VALIDAR GET AS OBJECT");
@@ -42,8 +44,10 @@ public class QuestaoConverter implements Converter{
     public String getAsString(FacesContext fc, UIComponent uic, Object value) {
         Questao q = (Questao)value;
         if(!value.equals("")){
+            System.out.println("RETORNO DO GETASSTRING"+String.valueOf(q.getId()));
             return String.valueOf(q.getId());
         }
+        System.out.println("GETASSTRING RETORNOU NULL");
         return null;
     }
     

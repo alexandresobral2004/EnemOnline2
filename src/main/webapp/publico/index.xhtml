@@ -16,16 +16,8 @@
                 <h:form id="formPulico">
                     
                     <br/><br/>
-                    <div class="nomeAluno">
-                        
-                        <h:panelGrid columns="2">
-                            <h:outputText value="Seja Bem-Vindo: "/>
-                            <h:outputText value="#{alunoFaces.userLogado().nome}" />
-                        </h:panelGrid>
-                        
-                    </div>
-                    <br/>
-                    <br/>
+                   
+                   
                     <center>
                         
                    
@@ -44,12 +36,24 @@
                      </center>
                 </h:form>
                 <br/><br/>
+                
+                 <div class="nomeAluno">
+                        
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Seja Bem-Vindo: "/>
+                            <h:outputText value="#{alunoFaces.userLogado().nome}" />
+                        </h:panelGrid>
+                        
+                    </div>
+                 <br/><br/>
                 <h:form>
-                    <p:menubar style="margin-left: 92%; margin-right:0%; height: 25px !important; ">
+                    <p:menubar class="botaoSair" >
                      
                         <p:menuitem value="Sair"   url="/j_spring_security_logout" action="logout.jsf"  icon="iconeSair" />
                 </p:menubar>
                 </h:form>
+                 <br/><br/>
+                  
                 
             </ui:define>
 

@@ -174,12 +174,20 @@ public class itemFaces implements Serializable {
     }
     
     public void findItensEdicao() {
-        this.itens = itemDAO.getItemsQuestao(this.selectQuestao.getId());
-        this.selectItem_a = itens.get(0);
-        this.selectItem_b = itens.get(1);
-        this.selectItem_c = itens.get(2);
-        this.selectItem_d = itens.get(3);
-        this.selectItem_e = itens.get(4);
+        try{
+             this.itens = itemDAO.getItemsQuestao(this.selectQuestao.getId());
+             this.selectItem_a = itens.get(0);
+             this.selectItem_b = itens.get(1);
+             this.selectItem_c = itens.get(2);
+             this.selectItem_d = itens.get(3);
+             this.selectItem_e = itens.get(4);
+            
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dados não cadastrados", "Dados não cadastrados!!");
+            FacesContext.getCurrentInstance().addMessage("message", message);
+        }
+       
        
     }
 
@@ -303,7 +311,7 @@ public class itemFaces implements Serializable {
 
     public String addItem() throws Exception {
         preencheQuestao();//Seta a questao nos itens
-        preencheItemImagem(); //Seta o nome da imagem ao item 
+        //preencheItemImagem(); //Seta o nome da imagem ao item 
         boolean valida =  verificaItem();//Verifica se já existem ítens na questão e se houver não grava
         boolean itemCorreto = validaItemCorreto(selectItem_a, selectItem_b, selectItem_c, selectItem_d, selectItem_e);
         int id = selectQuestao.getId();

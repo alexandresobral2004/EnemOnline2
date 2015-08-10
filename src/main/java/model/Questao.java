@@ -30,7 +30,7 @@ public class Questao implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(length = 2000,nullable = false)
+    @Column(length = 2000)
     private String texto;
     @Column(length = 50)
     private String tema;

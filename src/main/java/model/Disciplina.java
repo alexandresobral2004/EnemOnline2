@@ -26,6 +26,7 @@ public class Disciplina implements Serializable{
     private Integer ID;
     private String nome;
    
+   
 
     
     
@@ -45,6 +46,10 @@ public class Disciplina implements Serializable{
         this.nome = nome;
     }
 
+   
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 3;

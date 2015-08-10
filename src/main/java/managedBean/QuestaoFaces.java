@@ -41,9 +41,8 @@ import org.primefaces.model.UploadedFile;
  */
 @ManagedBean
 @SessionScoped
-public class QuestaoFaces implements Serializable{
+public class QuestaoFaces implements Serializable {
 
-    
     private Prova selectedProva;
     private Questao selectedQuestao;
     private List<Questao> questoes;
@@ -53,9 +52,6 @@ public class QuestaoFaces implements Serializable{
     private List<Disciplina> disciplinas;
     private String newFileName_A;
 
-    
-   
-    
     //Componentes para renderização
     private Boolean selectCheckbox = false;
     private Boolean renderCompUpload = false;
@@ -66,10 +62,7 @@ public class QuestaoFaces implements Serializable{
     private QuestaoDAO questaoDAO;
     @Inject
     private disciplinaDAO disciDAO;
-    
-   
-  
-    
+
     public Boolean getRenderCompUpload() {
         return renderCompUpload;
     }
@@ -101,9 +94,6 @@ public class QuestaoFaces implements Serializable{
     public void setDisciplinas(List<Disciplina> disciplinas) {
         this.disciplinas = disciplinas;
     }
-    
-    
-    
 
     public Boolean getSelectCheckbox() {
         return selectCheckbox;
@@ -112,7 +102,6 @@ public class QuestaoFaces implements Serializable{
     public void setSelectCheckbox(Boolean selectCheckbox) {
         this.selectCheckbox = selectCheckbox;
     }
-    
 
     public Prova getSelectedProva() {
         return selectedProva;
@@ -138,153 +127,138 @@ public class QuestaoFaces implements Serializable{
         this.selectedItem = selectedItem;
     }
 
-    
-   
-    
-    public String startQuestao(){
-      this.selectedProva = new Prova();
+    public String startQuestao() {
+        this.selectedProva = new Prova();
         this.selectedQuestao = new Questao();
-       //Instancia itens das questoes
+        //Instancia itens das questoes
         this.selectedItem = new Item();
-        
+
         //incrementaNumQuestao();
-         findAllQuestaoes();//Carrega a lista de questões cadastradas
-         carregaDisciplinas();//carrega a lista de disciplinas
+        findAllQuestaoes();//Carrega a lista de questões cadastradas
+        carregaDisciplinas();//carrega a lista de disciplinas
         System.out.println("Inicia Questão");
         return "/admin/Cad_questao.jsf";
-    } 
-    
+    }
+
     public QuestaoFaces() {
         this.selectedProva = new Prova();
-        
+
     }
-    
-    
-    
-    public void addQuestao() throws Exception{
-      
-         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Questão Gravada com Sucesso", "Dados Gravados Com Sucesso!!");
-         FacesContext.getCurrentInstance().addMessage("message", message);
-          verificaImagem();
-        questaoDAO.addquestao(selectedQuestao);
-        findAllQuestaoes();
-         
-        selectedQuestao = new Questao();
-        this.newFileName_A = null;
-       // incrementaNumQuestao();
-        System.out.println("Questão Inserida");
-    }
-    
-    public void verificaImagem(){
-      
-        if(this.newFileName_A==null){
-            this.selectedQuestao.setImagem(".");
+
+    public void addQuestao() throws Exception {
+
+        if (!selectedQuestao.getTexto().isEmpty()) {
+            
+           
+            verificaImagem();
+            questaoDAO.addquestao(selectedQuestao);
+            findAllQuestaoes();
+
+            selectedQuestao = new Questao();
+            this.newFileName_A = null;
+            // incrementaNumQuestao();
+             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Questão Gravada com Sucesso", "Dados Gravados Com Sucesso!!");
+            FacesContext.getCurrentInstance().addMessage("message", message);
+            System.out.println("Questão Inserida");
+        } else {
+           FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "PREENCHA A DESCRIÇÃO DA QUESTÃO", "PREENCHA A DESCRIÇÃO DA QUESTÃO!!");
+            FacesContext.getCurrentInstance().addMessage("message", message);
+
         }
-        else{
+
+    }
+
+    public void verificaImagem() {
+
+        if (this.newFileName_A == null) {
+            this.selectedQuestao.setImagem(".");
+        } else {
             this.selectedQuestao.setImagem(this.newFileName_A);
         }
     }
-    
-    public String newQuestao(){
-     
-      this.selectedQuestao = new Questao();
-       this.selectedQuestao.setImagem(".");
+
+    public void newQuestao() {
+
+        this.selectedQuestao = new Questao();
+        this.selectedQuestao.setImagem(".");
         this.newFileName_A = null;
       //incrementaNumQuestao();
-        return "/admin/Cad_questao.jsf";
-      
+
     }
-    
-  
-    
-    public String startEditQuestao(){
+
+    public String startEditQuestao() {
         return "/admin/editQuestao.jsf";
     }
-    
+
     public String editQuestao() throws Exception {
-        
-       
+
         questaoDAO.editQuestao(this.selectedQuestao);
-          
-        FacesMessage msg = new FacesMessage("Questão Editada",null);
+
+        FacesMessage msg = new FacesMessage("Questão Editada", null);
         FacesContext.getCurrentInstance().addMessage(null, msg);
         return "/admin/Cad_questao.jsf";
     }
-     
+
     public void onCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Questao Não Editada", null);
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    
+
    // FacesContext fc = FacesContext.getCurrentInstance();
     //HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
     //Integer valor = session.setAttribute(this.selectedQuestao.getNumQuestao());
-    
     /*   RECUPERANDO VALOR
-    HttpServletRequest request = (HttpServletRequest) req;
-    HttpSession session = (HttpSession) request.getSession();
-    Integer idUsuarioSession = session.getAttribute("NUM");*/
-    
-   public void delQuestao() throws Exception{
-       questaoDAO.delQuestao(selectedQuestao);
-       FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN,"Questão Apagada com Sucesso", null);
-       FacesContext.getCurrentInstance().addMessage("message", message);
-         findAllQuestaoes();
-   }
-    
-    
-    
-    
-    
-   
-    public void findAllQuestaoes(){
-        questoes = new ArrayList<>();
-        questoes = questaoDAO.getAllQuestoes();
-        
-        
-        
+     HttpServletRequest request = (HttpServletRequest) req;
+     HttpSession session = (HttpSession) request.getSession();
+     Integer idUsuarioSession = session.getAttribute("NUM");*/
+    public void delQuestao() throws Exception {
+        questaoDAO.delQuestao(selectedQuestao);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Questão Apagada com Sucesso", null);
+        FacesContext.getCurrentInstance().addMessage("message", message);
+        this.questoes = questaoDAO.getAllQuestoes();
+        System.out.println("Questão Apagada");
     }
-    
-  
-    public void carregaDisciplinas(){
+
+    public void findAllQuestaoes() {
+        this.questoes = new ArrayList<>();
+        this.questoes = questaoDAO.getAllQuestoes();
+
+    }
+
+    public void carregaDisciplinas() {
         this.disciplinas = null;
         this.disciplinas = disciDAO.findAllDisciplinas();
     }
-           
 
     UploadedFile file;
-    
 
-        public void uploadImagem(FileUploadEvent event) {
-            file = event.getFile();
-            ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-            this.newFileName_A = servletContext.getRealPath("") + File.separator + "resources" + File.separator + "imagem"+ File.separator +file.getFileName();
-                
-            System.out.println("Caminho"+ newFileName_A);
-     
-             
-            FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            try {
-                FileOutputStream fos = new FileOutputStream(new File(newFileName_A));
-                InputStream is = file.getInputstream();
-                int BUFFER_SIZE = 8192;
-                byte[] buffer = new byte[BUFFER_SIZE];
-                int a;
-                while (true) {
-                    a = is.read(buffer);
-                    if (a < 0) {
-                        break;
-                    }
-                    fos.write(buffer, 0, a);
-                    fos.flush();
+    public void uploadImagem(FileUploadEvent event) {
+        file = event.getFile();
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        this.newFileName_A = servletContext.getRealPath("") + File.separator + "resources" + File.separator + "imagem" + File.separator + file.getFileName();
+
+        System.out.println("Caminho" + newFileName_A);
+
+        FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        try {
+            FileOutputStream fos = new FileOutputStream(new File(newFileName_A));
+            InputStream is = file.getInputstream();
+            int BUFFER_SIZE = 8192;
+            byte[] buffer = new byte[BUFFER_SIZE];
+            int a;
+            while (true) {
+                a = is.read(buffer);
+                if (a < 0) {
+                    break;
                 }
-                fos.close();
-                is.close();
-            } catch (IOException e) {
+                fos.write(buffer, 0, a);
+                fos.flush();
             }
+            fos.close();
+            is.close();
+        } catch (IOException e) {
         }
+    }
 
-
-    
 }

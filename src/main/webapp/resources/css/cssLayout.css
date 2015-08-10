@@ -62,6 +62,7 @@
     margin: 10px 170px 0px 170px;
     text-align: justify;
     background-size: 80%;
+    height: 100%;
  
     
    
@@ -186,9 +187,24 @@
 }
 
 .nomeAluno{
-    margin: 0px 0px 0px 75%;
+   
     text-transform: uppercase;
      text-shadow: 1px 1px #dddddd;
+     float:left;
+}
+.botaoSair {
+    float:right;
+    position: relative;
+    bottom: 25px;
+    
+    
+}
+
+.botaoSair:hover{
+     background: #006000 ;
+     box-shadow:0 5px 0 #72B42D;
+     color:#fff;
+     
 }
 
 
@@ -281,8 +297,10 @@ box-shadow: 1px 1px 3px #000;
 .body_template{
     border:  3px outset black;
     box-shadow: 0px 10px 10px 2px #CDC9C9;
-    height:100%;
-    margin:10px;
+    height:110%;
+    padding:10px;
+    margin:5px;
+   
     
     
 }

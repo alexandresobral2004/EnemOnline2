@@ -15,23 +15,27 @@
                     <p:growl id="message"/>
                     <center>
                         <br/>
-                       <p:panelGrid columns="2" id="pnlDisci">
-                        <f:facet name="header">
-                            Cadastro de Disciplinas
-                        </f:facet>
-                        <h:outputText value="Nome da Discplina.:"/>
-                        <p:inputText value="#{disciplinaFaces.selectedDisci.nome}" required="true" >
-                        <f:validateLength minimum="4" />
-                        </p:inputText>
-                    </p:panelGrid>
-                    <br/>
-                    <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
-                        <p:commandButton action="#{disciplinaFaces.newObject()}" value="Novo" ajax="false" />
-                        <p:commandButton value="Gravar" action="#{disciplinaFaces.addDisciplina()}"  update="disci:message">
-                             <f:ajax execute="@form" render="message"/>
-                        </p:commandButton>
-                    </p:panel>
+                        <p:panelGrid columns="2" id="pnlDisci">
+                            <f:facet name="header">
+                                Cadastro de Disciplinas
+                            </f:facet>
+                            <h:outputText value="Nome da Discplina.:"/>
+                            <p:inputText value="#{disciplinaFaces.selectedDisci.nome}" required="true" >
+                                <f:validateLength minimum="4" />
+                            </p:inputText>
+                           
+
+                        </p:panelGrid>
+                        <br/>
+                        <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
+                            <p:commandButton action="#{disciplinaFaces.newObject()}" value="Novo" ajax="false" />
+                            <p:commandButton value="Gravar" action="#{disciplinaFaces.addDisciplina()}"  update="disci:message">
+                                <f:ajax execute="@form" render="message"/>
+                            </p:commandButton>
+                        </p:panel>
                     </center>
+                    
+
                 </h:form>
             </ui:define>
 

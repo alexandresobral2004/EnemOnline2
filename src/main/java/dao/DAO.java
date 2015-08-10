@@ -43,6 +43,8 @@ public abstract class DAO<T, PK extends Serializable> implements Serializable {
 
     public void atualizar(T t) throws Exception {
         em.merge(t);
+        em.flush();
+        
        
        
         
@@ -84,7 +86,7 @@ public abstract class DAO<T, PK extends Serializable> implements Serializable {
       public <T> List<T> getAlunobyLogin(Class<T> entityClass, String jpql, String value) {
       //  em = getEntityManager();
         List toReturn = null;
-        Query query = em.createQuery(jpql);
+        Query query = em.createNativeQuery(jpql);
         query.setParameter("login", value);
       
         toReturn = query.getResultList();

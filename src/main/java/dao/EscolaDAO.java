@@ -11,7 +11,6 @@ import javax.ejb.Stateless;
 import javax.persistence.PersistenceException;
 import javax.persistence.RollbackException;
 import model.Escola;
-import org.eclipse.persistence.exceptions.DatabaseException;
 import org.postgresql.util.PSQLException;
 
 /**
