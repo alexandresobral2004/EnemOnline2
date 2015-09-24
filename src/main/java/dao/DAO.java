@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
@@ -19,13 +21,35 @@ import javax.persistence.Query;
  */
 public abstract class DAO<T, PK extends Serializable> implements Serializable {
 
-    @PersistenceContext(unitName = "PersistenceUnit",type = PersistenceContextType.TRANSACTION)
+    @PersistenceContext(unitName = "PersistenceUnit")
     private EntityManager em;
-    private final Class<T> entityClass;
+    private  Class<T> entityClass;
+    
+   // private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenceUnit");
 
     protected EntityManager getEm() {
         return em;
     }
+
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
+    public Class<T> getEntityClass() {
+        return entityClass;
+    }
+
+    public void setEntityClass(Class<T> entityClass) {
+        this.entityClass = entityClass;
+    }
+
+    public DAO(EntityManager em, Class<T> entityClass) {
+        this.em = em;
+        this.entityClass = entityClass;
+    }
+    
+    
+    
 
     public DAO(Class classe) {
         this.entityClass = classe;
@@ -86,7 +110,7 @@ public abstract class DAO<T, PK extends Serializable> implements Serializable {
       public <T> List<T> getAlunobyLogin(Class<T> entityClass, String jpql, String value) {
       //  em = getEntityManager();
         List toReturn = null;
-        Query query = em.createNativeQuery(jpql);
+        Query query = em.createQuery(jpql);
         query.setParameter("login", value);
       
         toReturn = query.getResultList();

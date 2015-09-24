@@ -25,8 +25,7 @@ public class QuestaoDAO extends DAO<Questao, Long> implements Serializable{
    
     
     public void addquestao(Questao questao) throws Exception{
-        
-        salvar(questao);
+         salvar(questao);
         
     }
     

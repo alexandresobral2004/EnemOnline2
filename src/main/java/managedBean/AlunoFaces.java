@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.ViewExpiredException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -125,8 +126,16 @@ public class AlunoFaces implements Serializable,InterfacePadrao{
     }
      
       public String fazer_login() {
+          try{
+              return "/login.jsf";
+          }
+          catch(ViewExpiredException e){
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sessão expirou!, carregue novamente a página ",null);
+                FacesContext.getCurrentInstance().addMessage("message", message);
+          }
+        return null;
       
-          return "/login.jsf";
+          
     }
   
     

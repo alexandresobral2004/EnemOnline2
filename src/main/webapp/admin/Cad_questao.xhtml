@@ -53,9 +53,9 @@
 
                         <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
                             <p:commandButton value="Novo" action="#{questaoFaces.newQuestao()}" ajax="false"  />
-                            <p:commandButton value="Gravar" action="#{questaoFaces.addQuestao()}"  ajax="false" update="form:questoes" >
+                            <p:commandButton value="Gravar" action="#{questaoFaces.addQuestao()}"  ajax="false" update="questoes,msgs" />
 
-                            </p:commandButton>
+                          
 
 
                         </p:panel>
@@ -119,7 +119,7 @@
 
                             </p:column>
                             <p:column style="width:60px" headerText="Apagar">
-                                <p:commandButton icon="ui-icon-trash"  update=":form:msgs,:form:questoes " action="#{questaoFaces.delQuestao()}"  ajax="false"   >
+                                <p:commandButton icon="ui-icon-trash"  update="msgs,form:questoes " action="#{questaoFaces.delQuestao()}"  ajax="false"    >
                                     <f:setPropertyActionListener value="#{q}" target="#{questaoFaces.selectedQuestao}"  />
 
 
@@ -147,7 +147,7 @@
 
                         </p:dataTable>
 
-
+                          <p:poll interval="3"  update="questoes" />     
                     </h:form>
 
                 </f:view>

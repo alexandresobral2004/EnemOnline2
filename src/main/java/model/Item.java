@@ -8,6 +8,7 @@ package model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class Item implements Serializable{
     private Boolean itemMarcado;
     @Column(nullable = true)
     private String nomeImagem;
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     private Questao questao;
 
     

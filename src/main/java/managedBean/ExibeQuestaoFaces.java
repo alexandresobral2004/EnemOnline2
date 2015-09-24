@@ -468,22 +468,25 @@ public class ExibeQuestaoFaces implements Serializable {
 
     
     public void preencheItens(Questao q) {
-        try {
 
-            this.itens = new ArrayList<>();
+        this.itens = new ArrayList<>();
 
-            this.itens = itemDAO.getItemsQuestao(q.getId());
+        this.itens = itemDAO.getItemsQuestao(q.getId());
+        if (itens.size() == 5) {
             this.selectItem_a = this.itens.get(0);
             this.selectItem_b = this.itens.get(1);
             this.selectItem_c = this.itens.get(2);
             this.selectItem_d = this.itens.get(3);
             this.selectItem_e = this.itens.get(4);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Itens não cadastrados", null);
+        } else {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Itens não cadastrados na questão número: "+selectedQuestao.getId(), null);
             FacesContext.getCurrentInstance().addMessage("message", message);
         }
 
     }
+       
+
+    
 
     public void mostraQuestao() {
         this.mostraquestao = true;
@@ -599,12 +602,12 @@ public class ExibeQuestaoFaces implements Serializable {
 
     public void caminhoImagem(Questao q) {
         int x = q.getImagem().length();
-        if (x > 86) {
+        if (x > 84) {
 
             String imagem = q.getImagem();
             System.out.println("Número de Bytes: " + String.valueOf(x));
 
-            String caminho = imagem.substring(86, x);
+            String caminho = imagem.substring(84, x);
 
             q.setImagem(caminho);
             System.out.println("Caminho modificado: " + caminho);

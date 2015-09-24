@@ -17,13 +17,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.el.EvaluationException;
 import javax.inject.Inject;
+import javax.persistence.OptimisticLockException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -146,25 +149,33 @@ public class QuestaoFaces implements Serializable {
     }
 
     public void addQuestao() throws Exception {
-
-        if (!selectedQuestao.getTexto().isEmpty()) {
+       try{
             
-           
-            verificaImagem();
-            questaoDAO.addquestao(selectedQuestao);
-            findAllQuestaoes();
+        
+            if (!selectedQuestao.getTexto().isEmpty()) {
 
-            selectedQuestao = new Questao();
-            this.newFileName_A = null;
-            // incrementaNumQuestao();
-             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Questão Gravada com Sucesso", "Dados Gravados Com Sucesso!!");
-            FacesContext.getCurrentInstance().addMessage("message", message);
-            System.out.println("Questão Inserida");
-        } else {
-           FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "PREENCHA A DESCRIÇÃO DA QUESTÃO", "PREENCHA A DESCRIÇÃO DA QUESTÃO!!");
-            FacesContext.getCurrentInstance().addMessage("message", message);
 
+                verificaImagem();
+                questaoDAO.addquestao(selectedQuestao);
+                this.questoes = questaoDAO.getAllQuestoes();
+
+                selectedQuestao = new Questao();
+                this.newFileName_A = null;
+                // incrementaNumQuestao();
+                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Questão Gravada com Sucesso", "Dados Gravados Com Sucesso!!");
+                FacesContext.getCurrentInstance().addMessage("message", message);
+                System.out.println("Questão Inserida");
+            } else {
+               FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "PREENCHA A DESCRIÇÃO DA QUESTÃO", "PREENCHA A DESCRIÇÃO DA QUESTÃO!!");
+                FacesContext.getCurrentInstance().addMessage("message", message);
+
+            }
         }
+        catch(OptimisticLockException e){
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Está Questão está sendo editada no momento, aguarde e tente mais tarde", "Está Questão está sendo editada no momento, por favor tente mais tarde");
+                FacesContext.getCurrentInstance().addMessage("message", message);
+        }
+       
 
     }
 
@@ -191,12 +202,28 @@ public class QuestaoFaces implements Serializable {
     }
 
     public String editQuestao() throws Exception {
+       try{
+                questaoDAO.editQuestao(this.selectedQuestao);
 
-        questaoDAO.editQuestao(this.selectedQuestao);
-
-        FacesMessage msg = new FacesMessage("Questão Editada", null);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        return "/admin/Cad_questao.jsf";
+                FacesMessage msg = new FacesMessage("Questão Editada", null);
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                 
+           
+       }
+       catch(OptimisticLockException e){
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "AVISO - Está 1uestão está sendo editada no momento, aguarde e tente mais tarde", "Está Questão está sendo editada no momento, por favor tente mais tarde");
+            FacesContext.getCurrentInstance().addMessage("message", message);
+        
+       
+        }
+         catch(EJBException f){
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "AVISO - Está questão está sendo editada no momento, aguarde e tente mais tarde", "Está Questão está sendo editada no momento, por favor tente mais tarde");
+            FacesContext.getCurrentInstance().addMessage("message", message);
+        
+       
+        }
+       
+       return "/admin/Cad_questao.jsf";
     }
 
     public void onCancel(RowEditEvent event) {
@@ -213,9 +240,10 @@ public class QuestaoFaces implements Serializable {
      Integer idUsuarioSession = session.getAttribute("NUM");*/
     public void delQuestao() throws Exception {
         questaoDAO.delQuestao(selectedQuestao);
+         this.questoes = questaoDAO.getAllQuestoes();
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Questão Apagada com Sucesso", null);
         FacesContext.getCurrentInstance().addMessage("message", message);
-        this.questoes = questaoDAO.getAllQuestoes();
+       
         System.out.println("Questão Apagada");
     }
 
@@ -239,8 +267,7 @@ public class QuestaoFaces implements Serializable {
 
         System.out.println("Caminho" + newFileName_A);
 
-        FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        
         try {
             FileOutputStream fos = new FileOutputStream(new File(newFileName_A));
             InputStream is = file.getInputstream();
@@ -254,10 +281,13 @@ public class QuestaoFaces implements Serializable {
                 }
                 fos.write(buffer, 0, a);
                 fos.flush();
+                FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
             }
             fos.close();
             is.close();
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -8,6 +8,7 @@ package dao;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import model.Aluno;
 
 /**
@@ -17,6 +18,8 @@ import model.Aluno;
 @Stateless
 public class AlunoDAO extends DAO<Aluno, Long> implements Serializable{
 
+    
+    
     public AlunoDAO() {
         super(Aluno.class);
     }
@@ -46,7 +49,7 @@ public class AlunoDAO extends DAO<Aluno, Long> implements Serializable{
     //"SELECT i FROM Aluno i where i.questao_id='"+id+"' ",id
     
      public List<Aluno> getAlunobyLogin(String login) {
-       List<Aluno> alunos = getAlunobyLogin(Aluno.class, "SELECT * FROM aluno  WHERE login="+login+"", login);
+       List<Aluno> alunos = getAlunobyLogin(Aluno.class, "SELECT a FROM Aluno a WHERE a.login=:login", login);
        return alunos;
     }
      

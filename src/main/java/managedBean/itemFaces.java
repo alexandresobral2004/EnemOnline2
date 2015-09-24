@@ -165,7 +165,7 @@ public class itemFaces implements Serializable {
         selectItem_c = new Item();
         selectItem_d = new Item();
         selectItem_e = new Item();
-        selectQuestao = new Questao();
+        
         preencheItemQuestao();
         carregaQuestoes();
 

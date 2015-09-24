@@ -7,6 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  *
@@ -30,7 +32,7 @@ public class Questao implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(length = 2000)
+    @Column(length = 5000)
     private String texto;
     @Column(length = 50)
     private String tema;
@@ -42,6 +44,9 @@ public class Questao implements Serializable{
     @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "questao_id")
     private List<Item> itens;
+    @Version
+    @Column()
+    private Integer versao;
 
     public List<Item> getItens() {
         return itens;
@@ -50,6 +55,15 @@ public class Questao implements Serializable{
     public void setItens(List<Item> itens) {
         this.itens = itens;
     }
+    public Integer getVersao() {
+        return versao;
+    }
+
+    public void setVersao(Integer versao) {
+        this.versao = versao;
+    }
+    
+    
     
     
     
@@ -129,12 +143,11 @@ public class Questao implements Serializable{
             this.numQuestao= qtde + 1;
         }
     }
-    
-    
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + this.id;
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -147,11 +160,21 @@ public class Questao implements Serializable{
             return false;
         }
         final Questao other = (Questao) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Questao{" + "id=" + id + '}';
+    }
+    
+    
+    
+
+    
     
     
    

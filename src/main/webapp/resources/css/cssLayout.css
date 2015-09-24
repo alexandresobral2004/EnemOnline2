@@ -177,6 +177,10 @@
 .ui-widget-content{
     
 }
+
+.ui-panel-content ui-widget-content{
+    background: #FFF ! important;
+}
 .ui-panelgrid-cell{
     padding: 5px !important;
     
